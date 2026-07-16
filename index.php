@@ -9,6 +9,12 @@
 </head>
 
 <body>
+
+    <?php
+
+
+    ?>
+
     <h1>Welcome to A-Z Peptides PH</h1>
     <p>This is the homepage of A-Z Peptides PH.</p>
 </body>
