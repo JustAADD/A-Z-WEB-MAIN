@@ -19,8 +19,14 @@ body {
     width: 100%;
 }
 
+#menuList {
+    transition: max-height 0.3s ease,
+        padding 0.3s ease;
+}
+
+
 nav {
-    padding: 50px 20px;
+    padding: 50px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,11 +42,10 @@ nav {
 
 nav ul {
     display: flex;
-    gap: 30px;
+    gap: 40px;
     align-items: center;
     justify-content: center;
     align-items: center;
-    display: flex;
 }
 
 nav ul li {
@@ -48,6 +53,7 @@ nav ul li {
     justify-content: center;
     align-items: center;
     display: flex;
+
 }
 
 nav ul li a {
@@ -77,6 +83,8 @@ nav ul li a {
     height: 80px;
 }
 
+
+
 @media (max-width: 1024px) {
 
     nav {
@@ -84,8 +92,8 @@ nav ul li a {
     }
 
     .logo img {
-        width: 140px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     nav ul {
