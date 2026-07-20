@@ -5,12 +5,12 @@
 :root {
     --body-font: 'Source Sans 3', sans-serif;
     --code-font: 'Source Code Pro', monospace;
+    --font-poppins: 'Poppins', sans-serif;
     --header-height: 70px;
 }
 
 * {
     box-sizing: border-box;
-    font-family: var(--body-font);
 }
 
 html,
@@ -33,7 +33,7 @@ nav {
     background: #ffffff;
     position: relative;
     height: 70px;
-
+    font-family: var(--body-font);
 }
 
 .logo {

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <nav class="shadow-md">
+    <nav class="shadow-xl">
         <div class="logo">
             <img src="./src/img/az-logo.png" alt="">
         </div>
