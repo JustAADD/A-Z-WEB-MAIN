@@ -19,9 +19,9 @@
 
         <ul id="menuList">
             <li class="font-poppins"><a href="./index.php">Home</a></li>
-            <li class="font-poppins"><a href="./about.php">Products</a></li>
-            <li class="font-poppins"><a href="./shop.php">Contact</a></li>
-            <li class="font-poppins"><a href="./contact.php">About us</a></li>
+            <li class="font-poppins"><a href="./shop.php">Products</a></li>
+            <li class="font-poppins"><a href="./contact.php">Contact</a></li>
+            <li class="font-poppins"><a href="./about.php">About us</a></li>
 
 
             <li class="soc-links gap-1">

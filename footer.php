@@ -28,6 +28,7 @@
                     </p>
                 </div>
 
+
                 <div class="flex items-center border border-gray-300 rounded-lg pl-5 pr-2 py-1 w-full max-w-sm">
                     <input type="email" placeholder="email address"
                         class="flex-1 bg-transparent outline-none text-gray-500 placeholder-gray-400 text-sm">
