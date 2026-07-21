@@ -18,8 +18,14 @@
             <h2 class="text-lg font-semibold">Tachyplesin 15</h2>
             <p class="text-sm font-normal mb-3">₱1699.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>
@@ -32,8 +38,14 @@
             <h2 class="text-lg font-semibold">Tachyplesin 30</h2>
             <p class="text-sm font-normal mb-3">₱1899.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>
@@ -46,8 +58,14 @@
             <h2 class="text-lg font-semibold">GHK 100</h2>
             <p class="text-sm font-normal mb-3">₱1399.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>
@@ -60,8 +78,14 @@
             <h2 class="text-lg font-semibold">KPV 10</h2>
             <p class="text-sm font-normal mb-3">₱1399.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>
@@ -76,8 +100,14 @@
             <h2 class="text-lg font-semibold">GTT1500 FUANG</h2>
             <p class="text-sm font-normal mb-3">₱1599.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>
@@ -89,8 +119,14 @@
             <h2 class="text-lg font-semibold">Tachyplesin I5</h2>
             <p class="text-sm font-normal mb-3">₱1699.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>
@@ -102,8 +138,14 @@
             <h2 class="text-lg font-semibold">Tachyplesin 30</h2>
             <p class="text-sm font-normal mb-3">₱1899.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>
@@ -115,8 +157,14 @@
             <h2 class="text-lg font-semibold">GHK 100</h2>
             <p class="text-sm font-normal mb-3">₱1399.00</p>
             <a href="./form.php"
-                class="inquire-btn p-10 bg-[#252525] w-full text-white bg-opacity-50 font-md py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#0e0e0e]">
-                Inquire now
+                class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+
+                &nbsp; See details &nbsp;
             </a>
         </div>
     </div>

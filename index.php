@@ -34,6 +34,47 @@
         </div>
     </div>
 
+    <div class="h-full w-full mx-auto px-30 py-20">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-2">
+            <p class="font-poppins text-3xl font-semibold">
+                Our Exclusive Products
+            </p>
+        </div>
+        <div class="mb-8">
+            <p class="font-poppins text-sm text-light font-normal text-gray-600">
+                5% OFF ON ALL PRODUCTS
+            </p>
+        </div>
+
+        <!-- shop starts here -->
+
+        <div class="w-full flex justify-center items-center max-w-5xl h-auto mx-auto">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <?php include('shop-items.php'); ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="h-full w-full mx-auto px-30 py-20">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-2">
+            <p class="font-poppins text-3xl font-semibold">
+                Customer Feedback
+            </p>
+        </div>
+        <div class=" mb-8">
+            <p class="font-poppins text-sm text-light font-normal text-gray-600">
+                Deliver consistent customer satisfaction
+            </p>
+        </div>
+
+        <div class="w-full flex justify-center items-center h-auto mx-auto">
+
+            <?php include('feedbacks.php'); ?>
+
+        </div>
+    </div>
+
 
     <?php
     include('footer.php');
