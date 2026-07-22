@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z Peptides PH</title>
-    <link href="./output.css" rel="stylesheet">
+    <link href="./src/output.css" rel="stylesheet">
 </head>
 
 <body>
@@ -35,6 +35,8 @@
                     5% OFF ON ALL PRODUCTS
                 </p>
             </div>
+
+
         </div>
 
         <!-- shop starts here -->

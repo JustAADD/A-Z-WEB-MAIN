@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z Peptides PH</title>
-    <link href="./output.css" rel="stylesheet">
+    <link href="./src/output.css" rel="stylesheet">
 </head>
 
 <body>
@@ -16,6 +16,16 @@
 
 
     <div class="w-full h-auto mx-auto py-20 px-20">
+
+        <a href="javascript:history.back()"
+            class="flex items-center justify-center w-25 h-10 rounded-md text-gray-500 hover:bg-gray-100 transition mb-5">
+
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 8l-4 4m0 0l4 4m-4-4h18" />
+            </svg>
+            &nbsp; Back
+        </a>
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2">
             <div class="mx-auto items-center justify-center w-100 h-auto">
                 <div class="image-container items-center justify-center shadow-md">

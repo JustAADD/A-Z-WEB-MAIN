@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z Peptides PH</title>
-    <link href="./output.css" rel="stylesheet">
+    <link href="./src/output.css" rel="stylesheet">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">Tachyplesin 15</h2>
             <p class="text-sm font-normal mb-3">₱1699.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -37,7 +37,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">Tachyplesin 30</h2>
             <p class="text-sm font-normal mb-3">₱1899.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -57,7 +57,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">GHK 100</h2>
             <p class="text-sm font-normal mb-3">₱1399.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -77,7 +77,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">KPV 10</h2>
             <p class="text-sm font-normal mb-3">₱1399.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -99,7 +99,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">GTT1500 FUANG</h2>
             <p class="text-sm font-normal mb-3">₱1599.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -118,7 +118,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">Tachyplesin I5</h2>
             <p class="text-sm font-normal mb-3">₱1699.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -137,7 +137,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">Tachyplesin 30</h2>
             <p class="text-sm font-normal mb-3">₱1899.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -156,7 +156,7 @@
         <div class="w-full mb-5 mt-3 font-poppins">
             <h2 class="text-lg font-semibold">GHK 100</h2>
             <p class="text-sm font-normal mb-3">₱1399.00</p>
-            <a href="./form.php"
+            <a href="./shop-details.php"
                 class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
