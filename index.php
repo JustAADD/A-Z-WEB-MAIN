@@ -68,8 +68,9 @@
                     </div>
                     <div class="w-full mb-5 mt-3 font-poppins">
                         <h2 class="text-lg font-semibold">Tachyplesin 15</h2>
-                        <p class="text-sm font-normal mb-3">₱1699.00</p>
-
+                        <p class="text-sm font-normal mb-2">₱1,699.00</p>
+                        <p class="text-sm font-light text-gray-800 mb-3">
+                            • TIRZ Complete set with kits </p>
                     </div>
                 </div>
 
@@ -78,9 +79,10 @@
                         <img src="./src/img/prod-img/T30.jpg" alt="Image 1" class="object-cover h-72 w-56">
                     </div>
                     <div class="w-full mb-5 mt-3 font-poppins">
-                        <h2 class="text-lg font-semibold">Tachyplesin 30</h2>
-                        <p class="text-sm font-normal mb-3">₱1899.00</p>
-
+                        <h2 class="text-lg font-semibold">GHK 50</h2>
+                        <p class="text-sm font-normal mb-2">₱1,199.00</p>
+                        <p class="text-sm font-light text-gray-800 mb-3">
+                            • Pepies Complete set with kits </p>
                     </div>
                 </div>
 
@@ -89,9 +91,10 @@
                         <img src="./src/img/prod-img/GHK100.jpg" alt="Image 1" class="object-cover h-72 w-56">
                     </div>
                     <div class="w-full mb-5 mt-3 font-poppins">
-                        <h2 class="text-lg font-semibold">GHK 100</h2>
-                        <p class="text-sm font-normal mb-3">₱1399.00</p>
-
+                        <h2 class="text-lg font-semibold">KPV 10</h2>
+                        <p class="text-sm font-normal mb-2">₱1,599.00</p>
+                        <p class="text-sm font-light text-gray-800 mb-3">
+                            • Pepies Complete set with kits </p>
                     </div>
                 </div>
 
@@ -100,9 +103,10 @@
                         <img src="./src/img/prod-img/KPV10.jpg" alt="Image 1" class="object-cover h-72 w-56">
                     </div>
                     <div class="w-full mb-5 mt-3 font-poppins">
-                        <h2 class="text-lg font-semibold">KPV 10</h2>
-                        <p class="text-sm font-normal mb-3">₱1399.00</p>
-
+                        <h2 class="text-lg font-semibold">GTT1500 FUANG</h2>
+                        <p class="text-sm font-normal mb-2">₱1,599.00</p>
+                        <p class="text-sm font-light text-gray-800 mb-3">
+                            • Pepies Complete set with kits </p>
                     </div>
                 </div>
 

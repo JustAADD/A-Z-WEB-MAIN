@@ -43,7 +43,7 @@
 
         <div class="w-full flex justify-center items-center max-w-5xl h-auto mx-auto">
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="w-full flex justify-center items-center">
                 <?php include('shop-items.php'); ?>
             </div>
         </div>

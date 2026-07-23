@@ -82,11 +82,8 @@
                 <div class="sm:col-span-3">
 
                     <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">QR Code</label>
-                    <svg accesskey="" xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 512 512">
-                        <path fill="currentColor" d="M0 0v512h512V0H0zm32 32h448v448H32V32zm96 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm0 64c-8.837 0-16-7.163-16-16s7.163-16 16-16 16 7.163 16 16-7.163 16-16 16zm256-64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm0 64c-8.837 0-16-7.163-16-16s7.163-16 16-16 16 7.163 16 16-7.163 16-16 16zM128 288c0-26.51-21.49-48-48-48s-48 21.49-48 48v128c0 26.51 21.49 48 48 48s48-21.49 48-48V288zm32 128c0 
-                            ... (truncated for brevity) ...
-                            -8.837 0-16-7.163-16-16s7.163-16 16-16 16 7.163 16 16-7.163 16-16 16z" />
-                    </svg>
+
+                    <img src="./src/img/qrpayment.jpg" alt="qr" class="border border-gray-300 w-auto">
 
                     <p class="mt-3 text-sm leading-6 text-gray-600">Scan the QR code to pay via GCash or PayMaya.
                     </p>
@@ -94,14 +91,16 @@
 
                 <!-- upload file -->
 
-                <div class="sm:col-span-3">
+                <div class="sm:col-span-3 mx-auto">
                     <label for="file-upload" class="block text-sm font-medium leading-6 text-gray-900">Upload
                         File</label>
                     <div class="mt-2">
                         <input id="file-upload" name="file-upload" type="file"
                             class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-600 hover:bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
                     </div>
-                    <p class="mt-3 text-sm leading-6 text-gray-600">Upload your screenshot payment transactions here.
+                    <p class="mt-3 text-sm leading-6 text-gray-600">• Upload your screenshot payment transactions here.
+                        <br>
+                        • Be sure to check the amount before paying
                     </p>
                 </div>
 
