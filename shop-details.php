@@ -2,8 +2,6 @@
 
 include('./db-con/db.php');
 
-session_start();
-
 if (isset($_GET['id'])) {
 
     $id = (int)$_GET['id'];
@@ -11,15 +9,18 @@ if (isset($_GET['id'])) {
     $sql = "SELECT * FROM shop_items WHERE id = $id";
     $result = mysqli_query($con, $sql);
 
-    if ($row = mysqli_fetch_assoc($result)) {
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
         $product_name = $row['product_name'];
         $price = $row['price'];
         $description = $row['description'];
     } else {
         die("Product not found.");
     }
+} else {
+    die("No product selected.");
 }
-
 
 ?>
 

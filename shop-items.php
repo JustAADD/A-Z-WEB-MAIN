@@ -1,7 +1,25 @@
 <?php
 include('./db-con/db.php');
 
-session_start();
+if (isset($_POST['submit'])) {
+    $id = $_POST['submit'];
+    $sql = "SELECT * FROM `shop_items` WHERE id = $id";
+    $result = mysqli_query($con, $sql);
+
+    $row = mysqli_fetch_array($result);
+
+    $id = $row['id'];
+    $product_name = $row['product_name'];
+    $price = $row['price'];
+    $description = $row['description'];
+
+    $_SESSION['id'] = $id;
+    $_SESSION['product_name'] = $product_name;
+    $_SESSION['price'] = $price;
+    $_SESSION['description'] = $description;
+
+    header('location:shop-details.php');
+}
 
 ?>
 
@@ -18,7 +36,8 @@ session_start();
 <body>
 
 
-    <form method="POST" action="" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <form method="POST" action="./shop-items.php"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <div class="mx-auto items-center justify-center">
             <div class="image-container h-80 w-60 flex items-center justify-center shadow-md">
                 <img src="./src/img/prod-img/T15.jpg" alt="Image 1" class="object-cover h-72 w-56">
@@ -28,7 +47,7 @@ session_start();
                 <p class="text-sm font-normal mb-2">₱1,699.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • TIRZ Complete set with kits </p>
-                <a href="" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                <button type="submit" name="submit" value="<?php echo $row['id']; ?>" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
                     border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
@@ -37,7 +56,7 @@ session_start();
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
         <div class="mx-auto items-center justify-center">

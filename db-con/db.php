@@ -17,4 +17,4 @@ if (!$con) {
     //     echo "Connected successfully";
 }
 
-mysqli_close($con);
+// mysqli_close($con);
