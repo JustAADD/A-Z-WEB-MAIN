@@ -6,21 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z Peptides PH</title>
     <link href="./src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body>
 
-    <div class="w-full h-auto mx-auto py-20 px-20 align-items-center justify-center">
+    <div class="w-full h-auto mx-auto py-8 px-20 align-items-center justify-center">
 
-        <a href="javascript:history.back()"
-            class="flex items-center justify-center w-25 h-10 rounded-md text-gray-500 hover:bg-gray-100 transition mb-5">
+        <div x-data="{ showExitModal: false }">
 
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M7 8l-4 4m0 0l4 4m-4-4h18" />
-            </svg>
-            &nbsp; Back
-        </a>
+            <!-- Back button (now opens confirmation instead of navigating directly) -->
+            <a href="javascript:void(0)" @click="showExitModal = true"
+                class="flex items-center justify-center w-25 h-10 rounded-md text-gray-500 hover:bg-gray-100 transition mb-5">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 8l-4 4m0 0l4 4m-4-4h18" />
+                </svg>
+                &nbsp; Back
+            </a>
+
+            <!-- Confirmation modal -->
+            <div x-show="showExitModal" x-transition class="fixed inset-0 z-50 flex items-center justify-center p-4"
+                style="display: none;">
+
+                <div @click.outside="showExitModal = false"
+                    class="w-full h-40 max-w-md rounded-lg p-6 shadow-lg bg-red-50  border-red-200">
+
+                    <div class="flex items-center gap-4 text-red-800">
+                        <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+                        <h2 class="text-base font-semibold text-red-900">Exit this form?</h2>
+                    </div>
+
+                    <p class="mt-2 text-sm text-gray-600 mb-2">
+                        Are you sure you want to exit? Any unsaved changes will be lost.
+                    </p>
+
+                    <div class="mt-5 flex justify-end gap-3">
+                        <button @click="showExitModal = false"
+                            class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button onclick="history.back()"
+                            class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                            Yes, Exit
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
         <div class="flex flex-col md:flex-row justify-center items-center mb-1">
             <p class="font-poppins text-3xl font-semibold text-gray-800">
                 INQUIRY FORM
