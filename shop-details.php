@@ -4,10 +4,12 @@ include('./db-con/db.php');
 
 if (isset($_GET['id'])) {
 
-    $id = (int)$_GET['id'];
+    $id = (int) $_GET['id'];
 
-    $sql = "SELECT * FROM shop_items WHERE id = $id";
-    $result = mysqli_query($con, $sql);
+    $stmt = mysqli_prepare($con, "SELECT product_name, price, description FROM shop_items WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -21,8 +23,8 @@ if (isset($_GET['id'])) {
 } else {
     die("No product selected.");
 }
-
 ?>
+
 
 
 <!DOCTYPE html>
@@ -42,7 +44,7 @@ if (isset($_GET['id'])) {
     ?>
 
     <form method="POST" action="">
-        <div class="w-full h-auto mx-auto py-20 px-20">
+        <div class="w-full h-auto align-items-center justify-center mx-auto py-20 px-20">
 
             <a href="javascript:history.back()"
                 class="flex items-center justify-center w-25 h-10 rounded-md text-gray-500 hover:bg-gray-100 transition mb-5">
@@ -56,7 +58,8 @@ if (isset($_GET['id'])) {
             <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2">
                 <div class="mx-auto items-center justify-center w-100 h-auto">
                     <div class="image-container items-center justify-center shadow-md">
-                        <img src="./src/img/prod-img/prod-drop2.jpg" alt="Image 1" class="object-cover">
+                        <img src="image.php?id=<?= (int)$id ?>" alt="<?= htmlspecialchars($product_name) ?>"
+                            class="object-cover">
                     </div>
                 </div>
                 <div class="mx-auto w-full items-center justify-center p-10">
@@ -86,9 +89,15 @@ if (isset($_GET['id'])) {
         </div>
     </form>
 
-    <?php
-    include('footer.php');
-    ?>
+    <!-- SUB FOOTER -->
+
+    <div class="text-center text-sm text-gray-500 ">
+        <div class="flex justify-center items-center soc-links gap-1 mb-4">
+            <i class="fa-brands fa-tiktok me-1"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+        </div>
+        © 2026 AZ-PH PEPTIDES
+    </div>
 </body>
 
 </html>
