@@ -24,13 +24,13 @@
     </sub>
 
     <div class="py-20">
-        <div class="h-auto w-full px-30 pt-10">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-2">
+        <div class="h-auto w-full  sm:px-10 md:px-15 lg:px-30 xl:px-30  pt-10">
+            <div class="flex flex-col lg:flex-row justify-between items-center mb-2">
                 <p class="font-poppins text-3xl font-semibold">
                     Products
                 </p>
             </div>
-            <div class="mb-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center mb-8">
                 <p class="font-poppins text-sm text-light font-normal">
                     5% OFF ON ALL PRODUCTS
                 </p>
@@ -41,7 +41,7 @@
 
         <!-- shop starts here -->
 
-        <div class="w-full flex justify-center items-center max-w-5xl h-auto mx-auto">
+        <div class="w-full flex justify-center items-center h-auto mx-auto">
 
             <div class="w-full flex justify-center items-center">
                 <?php include('shop-items.php'); ?>

@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
 
     <form method="POST" action="./shop-items.php"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ">
         <div class="mx-auto items-center justify-center">
             <div class="image-container h-80 w-60 flex items-center justify-center shadow-md">
                 <img src="./src/img/prod-img/T15.jpg" alt="Image 1" class="object-cover h-72 w-56">
