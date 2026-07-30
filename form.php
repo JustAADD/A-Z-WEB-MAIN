@@ -1,3 +1,50 @@
+<?php
+
+include('./db-con/db.php');
+
+if (isset($_GET['id'])) {
+
+    $id = (int) $_GET['id'];
+
+    $stmt = mysqli_prepare($con, "SELECT product_name, price, description FROM shop_items WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        $product_name = $row['product_name'];
+        $price = $row['price'];
+        $description = $row['description'];
+    } else {
+        die("Product not found.");
+    }
+}
+
+if (isset($_POST['submit'])) {
+
+    $firstName = $_POST['first-name'];
+    $lastName = $_POST['last-name'];
+    $email = $_POST['email'];
+    $comments = $_POST['comments'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    $order = $_POST['order'];
+
+    $stmt = mysqli_prepare($con, "INSERT INTO orders (name, email, phone, address, order) VALUES (?, ?, ?, ?, ?)");
+    mysqli_stmt_bind_param($stmt, "sssss", $firstName, $lastName, $email, $phone, $address, $order);
+    mysqli_stmt_execute($stmt);
+
+    header('location: success.php');
+    exit;
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,10 +147,18 @@
                     </div>
                 </div>
 
-                <div class="col-span-full">
+                <div class="sm:col-span-3">
 
                     <div class="mt-1">
                         <input id="email" name="email" type="email" autocomplete="email" placeholder="Email address"
+                            class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
+                    </div>
+                </div>
+
+                <div class="sm:col-span-3">
+
+                    <div class="mt-1">
+                        <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone number"
                             class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
                     </div>
                 </div>
@@ -138,7 +193,8 @@
                         <input id="file-upload" name="file-upload" type="file"
                             class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-600 hover:bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
                     </div>
-                    <p class="mt-3 text-sm leading-6 text-gray-600">• Upload your screenshot payment transactions here.
+                    <p class="mt-3 text-sm leading-6 text-gray-600">• Upload your screenshot payment transactions
+                        here.
                         <br>
                         • Be sure to check the amount before paying
                     </p>
@@ -149,7 +205,7 @@
                 <!-- submit button -->
 
                 <div class="col-span-full">
-                    <button type="submit"
+                    <button type="submit" name="submit"
                         class="rounded-md bg-[#313131] px-10 py-2 text-sm font-light text-white shadow-sm hover:bg-[#515151]">Submit</button>
                 </div>
 
