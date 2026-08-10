@@ -23,6 +23,22 @@ if (isset($_GET['id'])) {
 } else {
     die("No product selected.");
 }
+
+if (isset($_POST['submit'])) {
+    $id = (int) $_POST['product_id']; // or $_POST['product_id'] if you switch to hidden input
+
+    $stmt = mysqli_prepare($con, "SELECT id FROM shop_items WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        header('location: form.php?id=' . $id);
+        exit;
+    } else {
+        die("Product not found.");
+    }
+}
 ?>
 
 
@@ -33,7 +49,7 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z Peptides PH</title>
-    <link href="./src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/output.css">
 </head>
 
 <body>
@@ -42,7 +58,7 @@ if (isset($_GET['id'])) {
     include('nav.php');
     ?>
 
-    <form method="POST" action="">
+    <form method="POST" action="shop-details.php?id=<?= (int) $id ?>">
         <div class="w-full h-auto align-items-center justify-center mx-auto py-20 px-20">
 
             <a href="javascript:history.back()"
@@ -74,15 +90,18 @@ if (isset($_GET['id'])) {
                     </p>
 
 
-                    <a href="./form.php" name="order_now"
-                        class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                    <input type="hidden" name="product_id" value="<?= (int) $id ?>">
+
+                    <button type="submit" name="submit" class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                border-gray-300 hover:bg-gray-100 transition">
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                        &nbsp; Order now &nbsp;
-                    </a>
+
+                        &nbsp; Proceed to form &nbsp;
+                    </button>
                 </div>
             </div>
         </div>

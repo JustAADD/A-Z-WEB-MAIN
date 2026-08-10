@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z Peptides PH</title>
-    <link href="./src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="./src/output.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
 </head>
 
 <body>
 
     <?php
     include('nav.php');
-
     ?>
+
 
     <div class="h-150 w-full flex flex-col justify-center items-center p-10 sm:px-10 md:p-15 lg:p-15 xl:p-20 text-white bg-no-repeat bg-cover bg-center"
         style="background-image: linear-gradient(rgba(2, 84, 121, 0.9), rgba(2, 84, 121, 0.7)), url('./src/img/DP1.jpg'); background-position: center 100%;">
