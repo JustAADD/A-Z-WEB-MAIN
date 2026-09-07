@@ -46,10 +46,34 @@ if (isset($_POST['submit'])) {
     $email     = trim($_POST['email']);
     $phone     = trim($_POST['phone']);
     $address   = trim($_POST['address']);
+    $quantity  = trim($_POST['quantity']);
     $comments  = trim($_POST['comments']);
 
-    $stmt = mysqli_prepare($con, "INSERT INTO cus_orders (product_id, product_name, price, name, email, phone, address, comments) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($stmt, "isdsssss", $product_id, $product_name, $price, $name, $email, $phone, $address, $comments);
+    $qr_upload = null;
+    if (isset($_FILES['qr_upload']) && $_FILES['qr_upload']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = __DIR__ . '/uploads/qr/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        $ext = strtolower(pathinfo($_FILES['qr_upload']['name'], PATHINFO_EXTENSION));
+        $allowedExt = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (in_array($ext, $allowedExt)) {
+            $newFileName = 'qr_' . time() . '_' . uniqid() . '.' . $ext;
+            $targetPath  = $uploadDir . $newFileName;
+
+            if (move_uploaded_file($_FILES['qr_upload']['tmp_name'], $targetPath)) {
+                $qr_upload = 'uploads/qr/' . $newFileName; // relative path stored in DB
+            }
+        }
+    }
+    if ($qr_upload === null) {
+        die("Error uploading QR code. Please try again.");
+    }
+
+    $stmt = mysqli_prepare($con, "INSERT INTO cus_orders (product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    mysqli_stmt_bind_param($stmt, "isdsssssss", $product_id, $product_name, $price, $name, $email, $phone, $address, $quantity, $comments, $qr_upload);
     mysqli_stmt_execute($stmt);
 
     $orderSuccess = true;
@@ -68,6 +92,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Z Peptides PH</title>
     <link rel="stylesheet" href="./src/output.css">
+    <link rel="icon" type="image/png" href="./src/img/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -172,7 +197,7 @@ if (isset($_POST['submit'])) {
 
 
 
-            <form method="POST" action="">
+            <form method="POST" action="form.php" enctype="multipart/form-data">
 
                 <input type="hidden" name="product_id" value="<?= (int) $product_id ?>">
                 <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -212,7 +237,7 @@ if (isset($_POST['submit'])) {
 
                     <!-- permanent address -->
 
-                    <div class="col-span-full">
+                    <div class="sm:col-span-3">
                         <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Permanent
                             address</label>
                         <div class="mt-2">
@@ -221,6 +246,15 @@ if (isset($_POST['submit'])) {
                                 class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
                         </div>
 
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Set
+                            Quantity</label>
+                        <div class="mt-2">
+                            <input id="quantity" name="quantity" type="quantity" autocomplete="quantity"
+                                placeholder="Quantity"
+                                class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
+                        </div>
                     </div>
 
                     <!-- leave a comments -->
@@ -251,7 +285,7 @@ if (isset($_POST['submit'])) {
                         <label for="file-upload" class="block text-sm font-medium leading-6 text-gray-900">Upload
                             File</label>
                         <div class="mt-2">
-                            <input id="file-upload" name="file-upload" type="file"
+                            <input id="file-upload" name="qr_upload" type="file" accept="image/*"
                                 class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-600 hover:bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
                         </div>
                         <p class="mt-3 text-sm leading-6 text-gray-600">• Upload your screenshot payment transactions
@@ -260,8 +294,6 @@ if (isset($_POST['submit'])) {
                             • Be sure to check the amount before paying
                         </p>
                     </div>
-
-
 
                     <!-- submit button -->
 
