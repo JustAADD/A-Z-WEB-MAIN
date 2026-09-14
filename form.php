@@ -1,6 +1,6 @@
 <?php
 
-include('./db-con/db.php');
+require_once './db-con/db.php';
 
 if (isset($_GET['id'])) {
 
