@@ -82,7 +82,7 @@
 
                     <?php
 
-                    require_once('C:\xampp\htdocs\az-web-main\db-con\db.php');
+                    require('C:\xampp\htdocs\az-web-main\db-con\db.php');
                     // require_once('../db-con/db.php');
 
                     $stmt = mysqli_prepare($con, "SELECT product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload FROM cus_orders ORDER BY product_id DESC");
@@ -92,19 +92,22 @@
 
                     while ($order = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
-                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm px-6 py-4 whitespace-nowrap'>{$order['product_id']}</td>";
-                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($order['name']) . "</td>";
-                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($order['product_name']) . "</td>";
-                        echo "<td class='border px-4 py-3  border-gray-300 text-gray-600 text-sm px-6 py-4 whitespace-nowrap'>{$order['price']}</td>";
-                        echo "<td class='border px-4 py-3  border-gray-300 text-gray-600 text-sm px-6 py-4 whitespace-nowrap'>{$order['quantity']}</td>";
-                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm px-6 py-4'>" . nl2br(htmlspecialchars($order['address'])) . "</td>";
-                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm px-6 py-4 whitespace-nowrap'>" . htmlspecialchars($order['comments']) . "</td>";
-                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm px-6 py-4 whitespace-nowrap'>";
+                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm  whitespace-nowrap'>{$order['product_id']}</td>";
+                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm  whitespace-nowrap'>" . htmlspecialchars($order['name']) . "</td>";
+                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm  whitespace-nowrap'>" . htmlspecialchars($order['product_name']) . "</td>";
+                        echo "<td class='border px-4 py-3  border-gray-300 text-gray-600 text-sm  whitespace-nowrap'>{$order['price']}</td>";
+                        echo "<td class='border px-4 py-3  border-gray-300 text-gray-600 text-sm  whitespace-nowrap'>{$order['quantity']}</td>";
+                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm '>" . nl2br(htmlspecialchars($order['address'])) . "</td>";
+                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm  whitespace-nowrap'>" . htmlspecialchars($order['comments']) . "</td>";
+                        echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap'>";
                         // your action buttons / QR image go here
 
                         echo "<a href='view_qr.php?product_id={$order['product_id']}' class='text-indigo-600 hover:text-indigo-900'>View QR </a>";
-                        echo "<a href='delete_order.php?product_id={$order['product_id']}' class='text-red-600 hover:text-red-900 ml-4'>Delete</a>";
-
+                        // echo "<a href='delete_order.php?product_id={$order['product_id']}' class='text-red-600 hover:text-red-900 ml-4' onclick=\"return confirm('Delete this order?');\ >Delete</a>";
+                        echo "<form action='delete_order.php' method='POST' class='inline ml-4' onsubmit=\"return confirm('Delete this order?');\">
+                                <input type='hidden' name='product_id' value='{$order['product_id']}'>
+                                <button type='submit' class='text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer'>Delete</button>
+                              </form>";
                         echo "</td>";
                         echo "</tr>";
                     }
