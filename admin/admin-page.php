@@ -102,7 +102,11 @@
                         echo "<td class='border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap'>";
                         // your action buttons / QR image go here
 
-                        echo "<a href='view_qr.php?product_id={$order['product_id']}' class='text-indigo-600 hover:text-indigo-900'>View QR </a>";
+                        if (!empty($order['qr_upload'])) {
+                            echo "<button type='button' onclick=\"openQrModal('../" . htmlspecialchars($order['qr_upload'], ENT_QUOTES) . "')\" class='text-indigo-600 hover:text-indigo-900'>View QR</button>";
+                        } else {
+                            echo "<span class='text-gray-400 text-sm'>No QR</span>";
+                        }
                         // echo "<a href='delete_order.php?product_id={$order['product_id']}' class='text-red-600 hover:text-red-900 ml-4' onclick=\"return confirm('Delete this order?');\ >Delete</a>";
                         echo "<form action='delete_order.php' method='POST' class='inline ml-4' onsubmit=\"return confirm('Delete this order?');\">
                                 <input type='hidden' name='product_id' value='{$order['product_id']}'>
@@ -112,8 +116,22 @@
                         echo "</tr>";
                     }
                     ?>
+
                 </tbody>
             </table>
+
+            <div id="qrModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+                <div class="bg-white rounded-lg shadow-lg w-full max-w-sm mx-4 relative">
+                    <div class="flex justify-between items-center border-b px-4 py-3">
+                        <h3 class="text-lg font-medium text-gray-800">Product QR Code</h3>
+                        <button type="button" onclick="closeQrModal()"
+                            class="text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+                    </div>
+                    <div class="p-6 flex justify-center items-center min-h-[280px]">
+                        <img id="qrImage" src="" class="max-w-full max-h-72" alt="Product QR Code">
+                    </div>
+                </div>
+            </div>
 
             <div class="mt-4">
                 <h1 class="text-gray-600 text-sm">Note: The table is dynamic and will display orders from the database.
@@ -134,6 +152,31 @@
         </div>
 
 
+        <script>
+            function openQrModal(qrPath) {
+                const modal = document.getElementById('qrModal');
+                const img = document.getElementById('qrImage');
+
+                img.src = qrPath;
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+
+            function closeQrModal() {
+                const modal = document.getElementById('qrModal');
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.getElementById('qrImage').src = '';
+            }
+
+            document.getElementById('qrModal').addEventListener('click', function(e) {
+                if (e.target === this) closeQrModal();
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeQrModal();
+            });
+        </script>
 </body>
 
 </html>
