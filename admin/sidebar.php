@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,14 +67,57 @@
             </div>
 
             <!-- Bottom User Profile Section -->
-            <!-- <div class="p-4 border-t border-slate-800 flex items-center bg-slate-950">
-                <img class="w-10 h-10 rounded-full border-2 border-indigo-500" src="https://placeholder.com"
-                    alt="Avatar">
-                <div class="ml-3">
-                    <p class="text-sm font-medium text-white">Alex Doe</p>
-                    <p class="text-xs text-gray-400">Developer</p>
+            <!-- logout -->
+
+            <!-- Sidebar logout trigger -->
+            <div class="flex items-center px-4 py-2 text-gray-800 hover:bg-slate-800 hover:text-white rounded-lg
+transition duration-200 group">
+                <svg class="w-5 h-5 mr-3 text-gray-800 group-hover:text-white" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                    </path>
+                </svg>
+                <button type="button" onclick="openLogoutModal()"
+                    class="text-gray-800 group-hover:text-white">Logout</button>
+            </div>
+
+            <!-- Confirmation Modal -->
+            <div id="logoutModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+                <div class="bg-white rounded-xl shadow-lg p-6 w-80 text-center">
+                    <h2 class="text-lg font-semibold text-[#7E7C7C] mb-2">Confirm Logout</h2>
+                    <p class="text-sm text-[#7E7C7C] mb-6">Are you sure you want to logout admin?</p>
+
+                    <div class="flex justify-center gap-3">
+                        <button type="button" onclick="closeLogoutModal()"
+                            class="px-4 py-2 rounded-lg border border-[#7E7C7C] text-[#7E7C7C] hover:bg-gray-100">
+                            Cancel
+                        </button>
+                        <form method="POST" action="admin-page.php">
+                            <button type="submit" name="submit"
+                                class="px-4 py-2 rounded-lg bg-[#025479] text-white hover:bg-[#013f5c]">
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div> -->
+            </div>
+
+            <script>
+                function openLogoutModal() {
+                    const modal = document.getElementById('logoutModal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                }
+
+                function closeLogoutModal() {
+                    const modal = document.getElementById('logoutModal');
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            </script>
+
+
         </aside>
 </body>
 

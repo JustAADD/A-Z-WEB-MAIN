@@ -1,3 +1,21 @@
+<?php
+
+session_start();
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header("Location: sign-in.php");
+    exit();
+}
+
+if (isset($_POST['submit'])) {
+    // Destroy the session and redirect to the login page
+    session_destroy();
+    header("Location: sign-in.php");
+    exit();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +32,7 @@
     <?php include('sidebar.php'); ?>
 
     <!-- Main Content Area Wrapper -->
-    <div class="flex-1 flex flex-col overflow-hidden p-6">
+    <div class="flex-1 flex flex-col overflow-hidden p-8">
         <!-- Top Navbar -->
         <!-- <header class="h-16 bg-white shadow flex items-center justify-between px-6">
             <h1 class="text-xl font-semibold text-gray-800">Dashboard Overviews</h1>
