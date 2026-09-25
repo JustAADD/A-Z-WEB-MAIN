@@ -76,6 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
                 <button type="submit" class="w-full bg-[#025479] text-white px-4 py-2 rounded-lg ">
                     Sign In
                 </button>
+
+                <p class="text-sm text-[#7E7C7C] mt-4">Don't have an account? <a
+                        href="mailto:makilingadrian19@gmail.com" class="text-[#025479] hover:underline">Contact the
+                        admin</a></p>
             </form>
         </div>
     </div>
