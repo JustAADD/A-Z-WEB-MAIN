@@ -19,5 +19,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
     $con->close();
 }
 
-header("Location: admin-page.php");
+header("Location: admin_page.php");
 exit();
