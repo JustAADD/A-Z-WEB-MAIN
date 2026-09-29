@@ -49,6 +49,8 @@ if (isset($_POST['submit'])) {
     $quantity  = trim($_POST['quantity']);
     $comments  = trim($_POST['comments']);
 
+    $stmt = mysqli_prepare($con, "INSERT INTO cus_info (name, )");
+
     $qr_upload = null;
     if (isset($_FILES['qr_upload']) && $_FILES['qr_upload']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = __DIR__ . '/uploads/qr/';

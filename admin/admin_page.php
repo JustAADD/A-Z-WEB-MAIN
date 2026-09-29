@@ -64,8 +64,16 @@ if (isset($_POST['submit'])) {
                 </p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h3 class="text-gray-500 text-sm font-medium">Inventory</h3>
-                <p class="text-3xl font-bold text-gray-900 mt-2">00</p>
+                <h3 class="text-gray-500 text-sm font-medium">Customer Count</h3>
+                <p class="text-3xl font-bold text-gray-900 mt-2">
+                    <?php
+                    $totalCustomersQuery = "SELECT COUNT(*) AS total_customers FROM complete_orders";
+                    $totalCustomersResult = mysqli_query($con, $totalCustomersQuery);
+                    $totalCustomersRow = mysqli_fetch_assoc($totalCustomersResult);
+                    $totalCustomers = $totalCustomersRow['total_customers'];
+                    echo number_format($totalCustomers);
+                    ?>
+                </p>
             </div>
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                 <h3 class="text-gray-500 text-sm font-medium">Order Process</h3>
@@ -74,6 +82,7 @@ if (isset($_POST['submit'])) {
         </div>
 
         <h1 class=" text-xl font-semibold text-gray-800 mt-5">Customer Orders</h1>
+        <p class="text-gray-600 text-sm">This page displays all the customer orders and their details.</p>
 
         <div class="w-full overflow-y-auto py-2">
 
@@ -203,19 +212,18 @@ if (isset($_POST['submit'])) {
 
         <div class="mt-4">
             <h1 class="text-gray-600 text-sm">Note: The table is dynamic and will display orders from the database.
-            </h1>
-            <h1 class="text-gray-600 text-sm font-bold">Incoming Total Sales: ₱
-                <!-- <p class="font-bold">₱ -->
-                <?php
-                $totalSalesQuery = "SELECT SUM(price * quantity) AS total_sales FROM cus_orders
+                <h1 class="text-gray-600 text-sm font-bold">Incoming Total Sales: ₱
+                    <!-- <p class="font-bold">₱ -->
+                    <?php
+                    $totalSalesQuery = "SELECT SUM(price * quantity) AS total_sales FROM cus_orders
                 ";
-                $totalSalesResult = mysqli_query($con, $totalSalesQuery);
-                $totalSalesRow = mysqli_fetch_assoc($totalSalesResult);
-                $totalSales = $totalSalesRow['total_sales'];
-                echo number_format($totalSales, 2);
-                ?>
+                    $totalSalesResult = mysqli_query($con, $totalSalesQuery);
+                    $totalSalesRow = mysqli_fetch_assoc($totalSalesResult);
+                    $totalSales = $totalSalesRow['total_sales'];
+                    echo number_format($totalSales, 2);
+                    ?>
 
-            </h1>
+                </h1>
         </div>
     </main>
 

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['admin_login'])) {
     if ($result->num_rows > 0) {
         // Admin credentials are valid
         $_SESSION['admin_logged_in'] = true;
-        header("Location: admin-page.php");
+        header("Location: admin_page.php");
         exit();
     } else {
         // Invalid credentials

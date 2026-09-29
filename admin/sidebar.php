@@ -32,7 +32,7 @@
                 <!-- Navigation Links -->
                 <nav class="mt-6 px-2 space-y-2">
                     <a href="./admin_page.php"
-                        class="flex items-center px-4 py-3 text-gray-800 hover:bg-slate-800 hover:text-white rounded-lg transition duration-200 group">
+                        class="flex items-center text-sm px-4 py-3 text-gray-800 hover:bg-slate-800 hover:text-white rounded-lg transition duration-200 group">
                         <svg class="w-5 h-5 mr-3 text-gray-800 group-hover:text-white" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24" xmlns="http://w3.org">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -43,14 +43,25 @@
                     </a>
 
                     <a href="./status_order.php"
-                        class="flex items_center px-4 py-3 text-gray-800 hover:bg-slate-800 hover:text-white rounded-lg transition duration-200 group">
+                        class="flex items_center text-sm px-4 py-3 text-gray-800 hover:bg-slate-800 hover:text-white rounded-lg transition duration-200 group">
                         <svg class="w-5 h-5 mr-3 text-gray-800 group-hover:text-white" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24" xmlns="http://w3.org">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
                             </path>
                         </svg>
-                        <span>Order Completed</span>
+                        <span>Dispatching</span>
+                    </a>
+
+                    <a href="./information.php"
+                        class="flex items_center text-sm px-4 py-3 text-gray-800 hover:bg-slate-800 hover:text-white rounded-lg transition duration-200 group">
+                        <svg class="w-5 h-5 mr-3 text-gray-800 group-hover:text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://w3.org">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                        <span>Information</span>
                     </a>
 
                     <!-- <a href="users.php"
