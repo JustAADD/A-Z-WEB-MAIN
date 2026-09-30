@@ -5,7 +5,7 @@ require 'C:\xampp\htdocs\az-web-main\db-con\db.php';
 session_start();
 
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header("Location: admin-page.php");
+    header("Location: admin_page.php");
     exit();
 }
 

@@ -49,7 +49,13 @@ if (isset($_POST['submit'])) {
     $quantity  = trim($_POST['quantity']);
     $comments  = trim($_POST['comments']);
 
-    $stmt = mysqli_prepare($con, "INSERT INTO cus_info (name, )");
+    $stmt = mysqli_prepare($con, "INSERT INTO cus_info (name, email, phone, address) VALUES (?, ?, ?, ?)");
+    if (!$stmt) {
+        die("Prepare failed: " . mysqli_error($con));
+    }
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $phone, $address);
+    mysqli_stmt_execute($stmt);
+
 
     $qr_upload = null;
     if (isset($_FILES['qr_upload']) && $_FILES['qr_upload']['error'] === UPLOAD_ERR_OK) {
