@@ -196,8 +196,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱1,899.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="8" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -205,7 +205,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
         <!-- column 3 -->
@@ -219,8 +219,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱1,499.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="9" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -228,7 +228,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
         <div class="mx-auto items-center justify-center">
@@ -240,8 +240,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱1,499.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="10" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -249,7 +249,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
         <div class="mx-auto items-center justify-center">
@@ -261,8 +261,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱1,899.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="11" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -270,7 +270,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
         <div class="mx-auto items-center justify-center">
@@ -282,8 +282,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱2,599.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="12" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -291,7 +291,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
 
@@ -306,8 +306,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱1,899.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="13" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -315,7 +315,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
         <div class="mx-auto items-center justify-center">
@@ -327,8 +327,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱2,199.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="14" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -336,7 +336,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
         <div class="mx-auto items-center justify-center">
@@ -348,8 +348,8 @@ if (isset($_POST['submit'])) {
                 <p class="text-sm font-normal mb-2">₱2,599.00</p>
                 <p class="text-sm font-light text-gray-800 mb-3">
                     • Pepies Complete set with kits </p>
-                <a href="./shop-details.php"
-                    class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
+                <button type="submit" name="submit" value="15" class=" flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
+                    border-gray-300 hover:bg-gray-100 transition">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -357,7 +357,7 @@ if (isset($_POST['submit'])) {
                     </svg>
 
                     &nbsp; See details &nbsp;
-                </a>
+                </button>
             </div>
         </div>
     </form>

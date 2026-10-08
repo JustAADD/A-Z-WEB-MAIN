@@ -258,12 +258,12 @@ $result = mysqli_stmt_get_result($stmt);
 
                     <?php if ($search !== ''): ?>
 
-                        <a href="?entries=<?= $entries ?>"
-                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
+                    <a href="?entries=<?= $entries ?>"
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
 
-                            Clear
+                        Clear
 
-                        </a>
+                    </a>
 
                     <?php endif; ?>
 
@@ -308,121 +308,121 @@ $result = mysqli_stmt_get_result($stmt);
 
                     <?php if (mysqli_num_rows($result) > 0): ?>
 
-                        <?php while ($order = mysqli_fetch_assoc($result)): ?>
+                    <?php while ($order = mysqli_fetch_assoc($result)): ?>
 
-                            <tr>
+                    <tr>
 
-                                <!-- ID -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['product_id']) ?>
-                                </td>
-
-
-                                <!-- Customer -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['name']) ?>
-                                </td>
+                        <!-- ID -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['product_id']) ?>
+                        </td>
 
 
-                                <!-- Product -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['product_name']) ?>
-                                </td>
+                        <!-- Customer -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['name']) ?>
+                        </td>
 
 
-                                <!-- Price -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['price']) ?>
-                                </td>
+                        <!-- Product -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['product_name']) ?>
+                        </td>
 
 
-                                <!-- Quantity -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['quantity']) ?>
-                                </td>
+                        <!-- Price -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['price']) ?>
+                        </td>
 
 
-                                <!-- Address -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm">
-                                    <?= nl2br(htmlspecialchars($order['address'])) ?>
-                                </td>
+                        <!-- Quantity -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['quantity']) ?>
+                        </td>
 
 
-                                <!-- Comments -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['comments']) ?>
-                                </td>
+                        <!-- Address -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm">
+                            <?= nl2br(htmlspecialchars($order['address'])) ?>
+                        </td>
 
 
-                                <!-- Payment -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-
-                                    <?php if (!empty($order['qr_upload'])): ?>
-
-                                        <button type="button"
-                                            onclick="openQrModal('../<?= htmlspecialchars($order['qr_upload'], ENT_QUOTES) ?>')"
-                                            class="text-indigo-600 hover:text-indigo-900">
-
-                                            View QR
-
-                                        </button>
-
-                                    <?php else: ?>
-
-                                        <span class="text-gray-400 text-sm">
-                                            No QR
-                                        </span>
-
-                                    <?php endif; ?>
-
-                                </td>
+                        <!-- Comments -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['comments']) ?>
+                        </td>
 
 
-                                <!-- Action -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                        <!-- Payment -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
 
-                                    <!-- Delete -->
-                                    <form action="delete_order.php" method="POST" class="inline"
-                                        onsubmit="return confirm('Order Completed?');">
+                            <?php if (!empty($order['qr_upload'])): ?>
 
-                                        <input type="hidden" name="product_id"
-                                            value="<?= htmlspecialchars($order['product_id']) ?>">
+                            <button type="button"
+                                onclick="openQrModal('../<?= htmlspecialchars($order['qr_upload'], ENT_QUOTES) ?>')"
+                                class="text-indigo-600 hover:text-indigo-900">
 
-                                        <button type="submit"
-                                            class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer">
+                                View QR
 
-                                            Delete
+                            </button>
 
-                                        </button>
+                            <?php else: ?>
 
-                                    </form>
+                            <span class="text-gray-400 text-sm">
+                                No QR
+                            </span>
+
+                            <?php endif; ?>
+
+                        </td>
 
 
-                                    <!-- Dispatch -->
-                                    <button type="button" onclick="openDispatchModal(<?= (int)$order['product_id'] ?>)"
-                                        class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer ml-4">
+                        <!-- Action -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
 
-                                        Dispatch
+                            <!-- Delete -->
+                            <form action="delete_order.php" method="POST" class="inline"
+                                onsubmit="return confirm('Confirm Deletion?');">
 
-                                    </button>
+                                <input type="hidden" name="product_id"
+                                    value="<?= htmlspecialchars($order['product_id']) ?>">
 
-                                </td>
+                                <button type="submit"
+                                    class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer">
 
-                            </tr>
+                                    Delete
 
-                        <?php endwhile; ?>
+                                </button>
+
+                            </form>
+
+
+                            <!-- Dispatch -->
+                            <button type="button" onclick="openDispatchModal(<?= (int)$order['product_id'] ?>)"
+                                class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer ml-4">
+
+                                Dispatch
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <?php endwhile; ?>
 
                     <?php else: ?>
 
-                        <tr>
+                    <tr>
 
-                            <td colspan="9" class="text-center py-6 text-gray-500">
+                        <td colspan="9" class="text-center py-6 text-gray-500">
 
-                                No orders found.
+                            No orders found.
 
-                            </td>
+                        </td>
 
-                        </tr>
+                    </tr>
 
                     <?php endif; ?>
 
@@ -500,9 +500,9 @@ $result = mysqli_stmt_get_result($stmt);
 
                 <?php if ($search !== ''): ?>
 
-                    <span>
-                        for "<strong><?= htmlspecialchars($search) ?></strong>"
-                    </span>
+                <span>
+                    for "<strong><?= htmlspecialchars($search) ?></strong>"
+                </span>
 
                 <?php endif; ?>
 
@@ -515,20 +515,20 @@ $result = mysqli_stmt_get_result($stmt);
                 <!-- Previous -->
                 <?php if ($page > 1): ?>
 
-                    <a href="?page=<?= $page - 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
-                        class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
+                <a href="?page=<?= $page - 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
 
-                        Previous
+                    Previous
 
-                    </a>
+                </a>
 
                 <?php else: ?>
 
-                    <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
+                <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
 
-                        Previous
+                    Previous
 
-                    </span>
+                </span>
 
                 <?php endif; ?>
 
@@ -543,24 +543,24 @@ $result = mysqli_stmt_get_result($stmt);
 
                 <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
 
-                    <?php if ($i == $page): ?>
+                <?php if ($i == $page): ?>
 
-                        <span class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
+                <span class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
 
-                            <?= $i ?>
+                    <?= $i ?>
 
-                        </span>
+                </span>
 
-                    <?php else: ?>
+                <?php else: ?>
 
-                        <a href="?page=<?= $i ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
-                            class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
+                <a href="?page=<?= $i ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
 
-                            <?= $i ?>
+                    <?= $i ?>
 
-                        </a>
+                </a>
 
-                    <?php endif; ?>
+                <?php endif; ?>
 
                 <?php endfor; ?>
 
@@ -568,20 +568,20 @@ $result = mysqli_stmt_get_result($stmt);
                 <!-- Next -->
                 <?php if ($page < $totalPages): ?>
 
-                    <a href="?page=<?= $page + 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
-                        class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
+                <a href="?page=<?= $page + 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
+                    class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
 
-                        Next
+                    Next
 
-                    </a>
+                </a>
 
                 <?php else: ?>
 
-                    <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
+                <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
 
-                        Next
+                    Next
 
-                    </span>
+                </span>
 
                 <?php endif; ?>
 
@@ -612,80 +612,80 @@ $result = mysqli_stmt_get_result($stmt);
 
     <!-- dispatch -->
     <script>
-        const dispatchModal = document.getElementById('DispatchModal');
-        const dispatchInput = document.getElementById('dispatchProductId');
+    const dispatchModal = document.getElementById('DispatchModal');
+    const dispatchInput = document.getElementById('dispatchProductId');
 
-        function openDispatchModal(productId) {
-            dispatchInput.value = productId;
-            dispatchModal.classList.remove('hidden');
-            0
-            dispatchModal.classList.add('flex');
-        }
+    function openDispatchModal(productId) {
+        dispatchInput.value = productId;
+        dispatchModal.classList.remove('hidden');
+        0
+        dispatchModal.classList.add('flex');
+    }
 
-        function closeDispatchModal() {
-            dispatchModal.classList.add('hidden');
-            dispatchModal.classList.remove('flex');
-            dispatchInput.value = '';
-        }
+    function closeDispatchModal() {
+        dispatchModal.classList.add('hidden');
+        dispatchModal.classList.remove('flex');
+        dispatchInput.value = '';
+    }
 
-        // Close when clicking the dark backdrop
-        dispatchModal.addEventListener('click', (e) => {
-            if (e.target === dispatchModal) closeDispatchModal();
-        });
+    // Close when clicking the dark backdrop
+    dispatchModal.addEventListener('click', (e) => {
+        if (e.target === dispatchModal) closeDispatchModal();
+    });
 
-        // Close with Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeDispatchModal();
-        });
+    // Close with Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDispatchModal();
+    });
     </script>
 
 
     <!-- qr -->
     <script>
-        function openQrModal(qrPath) {
-            const modal = document.getElementById('qrModal');
-            const img = document.getElementById('qrImage');
+    function openQrModal(qrPath) {
+        const modal = document.getElementById('qrModal');
+        const img = document.getElementById('qrImage');
 
-            img.src = qrPath;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
+        img.src = qrPath;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
 
-        function closeQrModal() {
-            const modal = document.getElementById('qrModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.getElementById('qrImage').src = '';
-        }
+    function closeQrModal() {
+        const modal = document.getElementById('qrModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.getElementById('qrImage').src = '';
+    }
 
-        document.getElementById('qrModal').addEventListener('click', function(e) {
-            if (e.target === this) closeQrModal();
-        });
+    document.getElementById('qrModal').addEventListener('click', function(e) {
+        if (e.target === this) closeQrModal();
+    });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeQrModal();
-        });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeQrModal();
+    });
     </script>
 
 
     <script>
-        function changeEntries() {
+    function changeEntries() {
 
-            const entries = document.getElementById('entries').value;
+        const entries = document.getElementById('entries').value;
 
-            const search = <?= json_encode($search) ?>;
+        const search = <?= json_encode($search) ?>;
 
-            const params = new URLSearchParams();
+        const params = new URLSearchParams();
 
-            params.set('entries', entries);
-            params.set('page', 1);
+        params.set('entries', entries);
+        params.set('page', 1);
 
-            if (search !== '') {
-                params.set('search', search);
-            }
-
-            window.location.href = '?' + params.toString();
+        if (search !== '') {
+            params.set('search', search);
         }
+
+        window.location.href = '?' + params.toString();
+    }
     </script>
 </body>
 
