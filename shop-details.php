@@ -86,9 +86,34 @@ if (isset($_POST['submit'])) {
                         ₱<?php echo number_format($price, 2); ?>
                     </p>
 
-                    <p class="text-sm font-normal mb-10">
+                    <p class="text-sm font-normal mb-3">
                         <?php echo nl2br(htmlspecialchars($description)); ?>
                     </p>
+
+
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Quantity
+                    </label>
+
+                    <div class="flex h-10 w-36 overflow-hidden rounded-md border border-gray-300 text-gray-600 mb-6">
+                        <button type="button" onclick="decreaseQuantity()"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-xl font-bold text-gray-700">
+                            −
+                        </button>
+                        <!-- Quantity -->
+                        <input type="number" id="quantity" name="quantity" value="1" min="1"
+                            class="w-16 h-10 text-center border-x border-gray-300 outline-none" readonly>
+                        <!-- Plus Button -->
+                        <button type="button" onclick="increaseQuantity()"
+                            class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-xl font-bold text-gray-700">
+                            +
+                        </button>
+                    </div>
+
+                    <label class="block text-sm font-medium text-gray-700 mb-10">
+                        Sub total:
+                        ₱<span id="subtotal"><?php echo number_format($price, 2); ?></span>
+                    </label>
 
 
                     <input type="hidden" name="product_id" value="<?= (int) $id ?>">
@@ -117,6 +142,51 @@ if (isset($_POST['submit'])) {
         </div>
         © 2026 AZ-PH PEPTIDES
     </div>
+
+    <!-- quantity script -->
+    <script>
+        // Get the PHP price
+        const price = <?= (float) $price ?>;
+
+        const quantityInput = document.getElementById('quantity');
+        const subtotalElement = document.getElementById('subtotal');
+
+        function updateSubtotal() {
+            const quantity = parseInt(quantityInput.value) || 1;
+
+            const subtotal = price * quantity;
+
+            subtotalElement.textContent = subtotal.toLocaleString('en-PH', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        function increaseQuantity() {
+            let quantity = parseInt(quantityInput.value) || 1;
+
+            quantity++;
+
+            quantityInput.value = quantity;
+
+            updateSubtotal();
+        }
+
+        function decreaseQuantity() {
+            let quantity = parseInt(quantityInput.value) || 1;
+
+            if (quantity > 1) {
+                quantity--;
+
+                quantityInput.value = quantity;
+
+                updateSubtotal();
+            }
+        }
+
+        // Calculate initial subtotal
+        updateSubtotal();
+    </script>
 </body>
 
 </html>
