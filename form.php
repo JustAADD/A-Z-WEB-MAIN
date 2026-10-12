@@ -6,83 +6,179 @@ if (isset($_GET['id'])) {
 
     $id = (int) $_GET['id'];
 
-    $stmt = mysqli_prepare($con, "SELECT product_name, price FROM shop_items WHERE id = ?");
+    // Get the selected quantity, defaulting to 1.
+    $quantity = isset($_GET['quantity'])
+        ? filter_var($_GET['quantity'], FILTER_VALIDATE_INT)
+        : 1;
+
+    if (!$quantity || $quantity < 1) {
+        die("Invalid quantity.");
+    }
+
+    $stmt = mysqli_prepare(
+        $con,
+        "SELECT product_name, price
+         FROM shop_items
+         WHERE id = ?"
+    );
+
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
 
+        $row = mysqli_fetch_assoc($result);
 
         $product_id = $id;
         $product_name = $row['product_name'];
-        $price = $row['price'];
+        $price = (float) $row['price'];
+
+        // Calculate subtotal using the database price.
+        $subtotal = $price * $quantity;
     } else {
         die("Product not found.");
     }
+} else {
+    die("No product selected.");
 }
 
 if (isset($_POST['submit'])) {
 
-    $product_id = (int) $_POST['product_id'];
+    $product_id = filter_input(
+        INPUT_POST,
+        'product_id',
+        FILTER_VALIDATE_INT
+    );
 
-    $stmt = mysqli_prepare($con, "SELECT product_name, price FROM shop_items WHERE id = ?");
+    $quantity = filter_input(
+        INPUT_POST,
+        'quantity',
+        FILTER_VALIDATE_INT
+    );
+
+    if (!$product_id || !$quantity || $quantity < 1) {
+        die("Invalid product or quantity.");
+    }
+
+    // Always get the product's current price from the database.
+    $stmt = mysqli_prepare(
+        $con,
+        "SELECT product_name, price
+         FROM shop_items
+         WHERE id = ?"
+    );
+
     mysqli_stmt_bind_param($stmt, "i", $product_id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $product_name = $row['product_name'];
-        $price        = $row['price'];
-    } else {
+    if (!$row) {
         die("Product not found.");
     }
 
-    $firstName = trim($_POST['first-name']);
-    $lastName  = trim($_POST['last-name']);
+    $product_name = $row['product_name'];
+    $price = (float) $row['price'];
+    $subtotal = $price * $quantity;
+
+    $firstName = trim($_POST['first-name'] ?? '');
+    $lastName  = trim($_POST['last-name'] ?? '');
     $name      = $firstName . ' ' . $lastName;
-    $email     = trim($_POST['email']);
-    $phone     = trim($_POST['phone']);
-    $address   = trim($_POST['address']);
-    $quantity  = trim($_POST['quantity']);
-    $comments  = trim($_POST['comments']);
+    $email     = trim($_POST['email'] ?? '');
+    $phone     = trim($_POST['phone'] ?? '');
+    $address   = trim($_POST['address'] ?? '');
+    $comments  = trim($_POST['comments'] ?? '');
 
-    $stmt = mysqli_prepare($con, "INSERT INTO cus_info (name, email, phone, address) VALUES (?, ?, ?, ?)");
-    if (!$stmt) {
-        die("Prepare failed: " . mysqli_error($con));
+    // Save customer information.
+    $stmt = mysqli_prepare(
+        $con,
+        "INSERT INTO cus_info (name, email, phone, address)
+         VALUES (?, ?, ?, ?)"
+    );
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "ssss",
+        $name,
+        $email,
+        $phone,
+        $address
+    );
+
+    if (!mysqli_stmt_execute($stmt)) {
+        die("Unable to save customer information.");
     }
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $phone, $address);
-    mysqli_stmt_execute($stmt);
 
-
+    // Handle QR upload.
     $qr_upload = null;
-    if (isset($_FILES['qr_upload']) && $_FILES['qr_upload']['error'] === UPLOAD_ERR_OK) {
+
+    if (
+        isset($_FILES['qr_upload']) &&
+        $_FILES['qr_upload']['error'] === UPLOAD_ERR_OK
+    ) {
         $uploadDir = __DIR__ . '/uploads/qr/';
+
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
         }
 
-        $ext = strtolower(pathinfo($_FILES['qr_upload']['name'], PATHINFO_EXTENSION));
-        $allowedExt = ['jpg', 'jpeg', 'png', 'gif'];
+        $tmpFile = $_FILES['qr_upload']['tmp_name'];
 
-        if (in_array($ext, $allowedExt)) {
-            $newFileName = 'qr_' . time() . '_' . uniqid() . '.' . $ext;
-            $targetPath  = $uploadDir . $newFileName;
+        // Validate that the uploaded file is an actual image.
+        $imageInfo = getimagesize($tmpFile);
+        $mime = $imageInfo['mime'] ?? '';
 
-            if (move_uploaded_file($_FILES['qr_upload']['tmp_name'], $targetPath)) {
-                $qr_upload = 'uploads/qr/' . $newFileName; // relative path stored in DB
+        $allowedTypes = [
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/gif'  => 'gif'
+        ];
+
+        if ($imageInfo && isset($allowedTypes[$mime])) {
+
+            $newFileName = 'qr_' . bin2hex(random_bytes(16))
+                . '.' . $allowedTypes[$mime];
+
+            $targetPath = $uploadDir . $newFileName;
+
+            if (move_uploaded_file($tmpFile, $targetPath)) {
+                $qr_upload = 'uploads/qr/' . $newFileName;
             }
         }
     }
+
     if ($qr_upload === null) {
-        die("Error uploading QR code. Please try again.");
+        die("Error uploading QR code. Please upload a valid image.");
     }
 
-    $stmt = mysqli_prepare($con, "INSERT INTO cus_orders (product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($stmt, "isdsssssss", $product_id, $product_name, $price, $name, $email, $phone, $address, $quantity, $comments, $qr_upload);
-    mysqli_stmt_execute($stmt);
+    // Save order with product, quantity, and unit price.
+    $stmt = mysqli_prepare(
+        $con,
+        "INSERT INTO cus_orders
+        (product_id, product_name, price, name, email,
+         phone, address, quantity, comments, qr_upload)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    );
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "isdssssiss",
+        $product_id,
+        $product_name,
+        $price,
+        $name,
+        $email,
+        $phone,
+        $address,
+        $quantity,
+        $comments,
+        $qr_upload
+    );
+
+    if (!mysqli_stmt_execute($stmt)) {
+        die("Unable to save order.");
+    }
 
     $orderSuccess = true;
 }
@@ -255,15 +351,10 @@ if (isset($_POST['submit'])) {
                         </div>
 
                     </div>
-                    <div class="sm:col-span-3">
-                        <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Set
-                            Quantity</label>
-                        <div class="mt-2">
-                            <input id="quantity" name="quantity" type="quantity" autocomplete="quantity"
-                                placeholder="Quantity"
-                                class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
-                        </div>
-                    </div>
+
+
+                    <input type="hidden" name="quantity" value="<?= (int) $quantity ?>">
+
 
                     <!-- leave a comments -->
                     <div class="col-span-full">

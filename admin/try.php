@@ -578,4 +578,113 @@ while ($order = mysqli_fetch_assoc($result)) {
     echo "</td>";
     echo "</tr>";
 }
+
+
+
+
+if (isset($_POST['submit'])) {
+
+    $id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+
+    if (!$id || !$quantity || $quantity < 1) {
+        die("Invalid product or quantity.");
+    }
+
+    $stmt = mysqli_prepare(
+        $con,
+        "SELECT id, product_name, price
+         FROM shop_items
+         WHERE id = ?"
+    );
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $product = mysqli_fetch_assoc($result);
+
+    if (!$product) {
+        die("Product not found.");
+    }
+
+    if (!isset($_SESSION['order_items'])) {
+        $_SESSION['order_items'] = [];
+    }
+
+    // Store the selected product, quantity, and database price.
+    $_SESSION['order_items'][$id] = [
+        'product_id'   => (int) $product['id'],
+        'product_name' => $product['product_name'],
+        'quantity'     => $quantity,
+        'price'        => $product['price']
+    ];
+
+    header("Location: form.php");
+    exit;
+}
+
+// Display the selected product.
+if (isset($_POST['submit'])) {
+
+    $id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+
+    if (!$id || !$quantity || $quantity < 1) {
+        die("Invalid product or quantity.");
+    }
+
+    $stmt = mysqli_prepare(
+        $con,
+        "SELECT id FROM shop_items WHERE id = ?"
+    );
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+
+        header(
+            'Location: form.php?id=' . $id .
+                '&quantity=' . $quantity
+        );
+        exit;
+    } else {
+        die("Product not found.");
+    }
+}
+
+if (isset($_GET['id'])) {
+
+    $id = (int) $_GET['id'];
+
+    $stmt = mysqli_prepare(
+        $con,
+        "SELECT product_name, price, description
+         FROM shop_items
+         WHERE id = ?"
+    );
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        $product_name = $row['product_name'];
+        $price = $row['price'];
+        $description = $row['description'];
+    } else {
+        die("Product not found.");
+    }
+} else {
+    die("No product selected.");
+}
+
+
+
+
+
+
+
 ?>

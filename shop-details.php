@@ -1,17 +1,58 @@
 <?php
 
 include('./db-con/db.php');
+// Handle Proceed to Form
+if (isset($_POST['submit'])) {
 
-if (isset($_GET['id'])) {
+    $id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
+    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
 
-    $id = (int) $_GET['id'];
+    // Validate product ID and quantity
+    if (!$id || !$quantity || $quantity < 1) {
+        die("Invalid product or quantity.");
+    }
 
-    $stmt = mysqli_prepare($con, "SELECT product_name, price, description FROM shop_items WHERE id = ?");
+    // Check whether the product exists
+    $stmt = mysqli_prepare(
+        $con,
+        "SELECT id FROM shop_items WHERE id = ?"
+    );
+
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
     if ($result && mysqli_num_rows($result) > 0) {
+
+        // Pass product ID and quantity to form.php
+        header(
+            "Location: form.php?id=" . $id .
+                "&quantity=" . $quantity
+        );
+        exit;
+    } else {
+        die("Product not found.");
+    }
+}
+
+// Display product details
+if (isset($_GET['id'])) {
+
+    $id = (int) $_GET['id'];
+
+    $stmt = mysqli_prepare(
+        $con,
+        "SELECT product_name, price, description
+         FROM shop_items
+         WHERE id = ?"
+    );
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+
         $row = mysqli_fetch_assoc($result);
 
         $product_name = $row['product_name'];
@@ -22,22 +63,6 @@ if (isset($_GET['id'])) {
     }
 } else {
     die("No product selected.");
-}
-
-if (isset($_POST['submit'])) {
-    $id = (int) $_POST['product_id']; // or $_POST['product_id'] if you switch to hidden input
-
-    $stmt = mysqli_prepare($con, "SELECT id FROM shop_items WHERE id = ?");
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        header('location: form.php?id=' . $id);
-        exit;
-    } else {
-        die("Product not found.");
-    }
 }
 ?>
 
@@ -78,48 +103,50 @@ if (isset($_POST['submit'])) {
                             class="object-cover">
                     </div>
                 </div>
+
                 <div class="mx-auto w-full items-center justify-center p-10">
+
                     <h2 class="text-lg font-semibold">
-                        <?php echo htmlspecialchars($product_name); ?>
+                        <?= htmlspecialchars($product_name) ?>
                     </h2>
+
                     <p class="text-sm font-normal mb-3">
-                        ₱<?php echo number_format($price, 2); ?>
+                        ₱<?= number_format((float)$price, 2) ?>
                     </p>
 
                     <p class="text-sm font-normal mb-3">
-                        <?php echo nl2br(htmlspecialchars($description)); ?>
+                        <?= nl2br(htmlspecialchars($description)) ?>
                     </p>
-
 
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                         Quantity
                     </label>
 
                     <div class="flex h-10 w-36 overflow-hidden rounded-md border border-gray-300 text-gray-600 mb-6">
+
                         <button type="button" onclick="decreaseQuantity()"
                             class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-xl font-bold text-gray-700">
                             −
                         </button>
-                        <!-- Quantity -->
+
                         <input type="number" id="quantity" name="quantity" value="1" min="1"
                             class="w-16 h-10 text-center border-x border-gray-300 outline-none" readonly>
-                        <!-- Plus Button -->
+
                         <button type="button" onclick="increaseQuantity()"
                             class="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-xl font-bold text-gray-700">
                             +
                         </button>
+
                     </div>
 
                     <label class="block text-sm font-medium text-gray-700 mb-10">
-                        Sub total:
-                        ₱<span id="subtotal"><?php echo number_format($price, 2); ?></span>
+                        Subtotal: ₱<span id="subtotal"><?= number_format((float)$price, 2) ?></span>
                     </label>
 
+                    <input type="hidden" name="product_id" value="<?= (int)$id ?>">
 
-                    <input type="hidden" name="product_id" value="<?= (int) $id ?>">
-
-                    <button type="submit" name="submit" class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border
-                border-gray-300 hover:bg-gray-100 transition">
+                    <button type="submit" name="submit"
+                        class="flex items-center justify-center w-full h-10 rounded-md text-gray-500 border border-gray-300 hover:bg-gray-100 transition">
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -127,8 +154,11 @@ if (isset($_POST['submit'])) {
                         </svg>
 
                         &nbsp; Proceed to form &nbsp;
+
                     </button>
+
                 </div>
+
             </div>
         </div>
     </form>
