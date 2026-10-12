@@ -4,15 +4,15 @@ require 'C:\xampp\htdocs\az-web-main\db-con\db.php';
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // throw exceptions
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
-    $product_id = intval($_POST['product_id']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
+    $order_id = intval($_POST['order_id']);
 
     try {
         $con->begin_transaction();
 
         // 1. Copy the row(s) to the dispatched table
         $insert = $con->prepare("
-            INSERT INTO complete_orders (product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload)
+            INSERT INTO complete_orders (order_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload)
             SELECT product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload
             FROM cus_orders
             WHERE product_id = ?
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
         }
 
         // 2. Delete from the original table
-        $delete = $con->prepare("DELETE FROM cus_orders WHERE product_id = ?");
+        $delete = $con->prepare("DELETE FROM cus_orders WHERE order_id = ?");
         $delete->bind_param("i", $product_id);
         $delete->execute();
         $delete->close();

@@ -88,7 +88,8 @@ if ($page > $totalPages) {
 // offset
 $offset = ($page - 1) * $entries;
 // get orders
-$sql = "SELECT 
+$sql = "SELECT
+order_id,
             product_id,
             product_name,
             price,
@@ -318,7 +319,7 @@ $result = mysqli_stmt_get_result($stmt);
 
                                 <!-- ID -->
                                 <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['product_id']) ?>
+                                    <?= htmlspecialchars($order['order_id']) ?>
                                 </td>
 
 
@@ -394,8 +395,8 @@ $result = mysqli_stmt_get_result($stmt);
                                     <form action="delete_order.php" method="POST" class="inline"
                                         onsubmit="return confirm('Confirm Deletion?');">
 
-                                        <input type="hidden" name="product_id"
-                                            value="<?= htmlspecialchars($order['product_id']) ?>">
+                                        <input type="hidden" name="order_id"
+                                            value="<?= htmlspecialchars($order['order_id']) ?>">
 
                                         <button type="submit"
                                             class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer">
@@ -407,7 +408,7 @@ $result = mysqli_stmt_get_result($stmt);
 
 
                                     <!-- Dispatch -->
-                                    <button type="button" onclick="openDispatchModal(<?= (int)$order['product_id'] ?>)"
+                                    <button type="button" onclick="openDispatchModal(<?= (int)$order['order_id'] ?>)"
                                         class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer ml-4">
 
                                         Dispatch
