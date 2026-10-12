@@ -188,12 +188,12 @@ $result = mysqli_stmt_get_result($stmt);
 
         <?php if ($search !== ''): ?>
 
-            <a href="?entries=<?= $entries ?>"
-                class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
+        <a href="?entries=<?= $entries ?>"
+            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
 
-                Clear
+            Clear
 
-            </a>
+        </a>
 
         <?php endif; ?>
 
@@ -268,120 +268,120 @@ $result = mysqli_stmt_get_result($stmt);
 
             <?php if (mysqli_num_rows($result) > 0): ?>
 
-                <?php while ($order = mysqli_fetch_assoc($result)): ?>
+            <?php while ($order = mysqli_fetch_assoc($result)): ?>
 
-                    <tr>
+            <tr>
 
-                        <!-- ID -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                            <?= htmlspecialchars($order['product_id']) ?>
-                        </td>
-
-
-                        <!-- Customer -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                            <?= htmlspecialchars($order['name']) ?>
-                        </td>
+                <!-- ID -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                    <?= htmlspecialchars($order['product_id']) ?>
+                </td>
 
 
-                        <!-- Product -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                            <?= htmlspecialchars($order['product_name']) ?>
-                        </td>
+                <!-- Customer -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                    <?= htmlspecialchars($order['name']) ?>
+                </td>
 
 
-                        <!-- Price -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                            <?= htmlspecialchars($order['price']) ?>
-                        </td>
+                <!-- Product -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                    <?= htmlspecialchars($order['product_name']) ?>
+                </td>
 
 
-                        <!-- Quantity -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                            <?= htmlspecialchars($order['quantity']) ?>
-                        </td>
+                <!-- Price -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                    <?= htmlspecialchars($order['price']) ?>
+                </td>
 
 
-                        <!-- Address -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm">
-                            <?= nl2br(htmlspecialchars($order['address'])) ?>
-                        </td>
+                <!-- Quantity -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                    <?= htmlspecialchars($order['quantity']) ?>
+                </td>
 
 
-                        <!-- Comments -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                            <?= htmlspecialchars($order['comments']) ?>
-                        </td>
+                <!-- Address -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm">
+                    <?= nl2br(htmlspecialchars($order['address'])) ?>
+                </td>
 
 
-                        <!-- Payment -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-
-                            <?php if (!empty($order['qr_upload'])): ?>
-
-                                <button type="button"
-                                    onclick="openQrModal('../<?= htmlspecialchars($order['qr_upload'], ENT_QUOTES) ?>')"
-                                    class="text-indigo-600 hover:text-indigo-900">
-
-                                    View QR
-
-                                </button>
-
-                            <?php else: ?>
-
-                                <span class="text-gray-400 text-sm">
-                                    No QR
-                                </span>
-
-                            <?php endif; ?>
-
-                        </td>
+                <!-- Comments -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                    <?= htmlspecialchars($order['comments']) ?>
+                </td>
 
 
-                        <!-- Action -->
-                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                <!-- Payment -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
 
-                            <!-- Delete -->
-                            <form action="delete_order.php" method="POST" class="inline"
-                                onsubmit="return confirm('Order Completed?');">
+                    <?php if (!empty($order['qr_upload'])): ?>
 
-                                <input type="hidden" name="product_id" value="<?= htmlspecialchars($order['product_id']) ?>">
+                    <button type="button"
+                        onclick="openQrModal('../<?= htmlspecialchars($order['qr_upload'], ENT_QUOTES) ?>')"
+                        class="text-indigo-600 hover:text-indigo-900">
 
-                                <button type="submit"
-                                    class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer">
+                        View QR
 
-                                    Delete
+                    </button>
 
-                                </button>
+                    <?php else: ?>
 
-                            </form>
+                    <span class="text-gray-400 text-sm">
+                        No QR
+                    </span>
+
+                    <?php endif; ?>
+
+                </td>
 
 
-                            <!-- Dispatch -->
-                            <button type="button" onclick="openDispatchModal(<?= (int)$order['product_id'] ?>)"
-                                class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer ml-4">
+                <!-- Action -->
+                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
 
-                                Dispatch
+                    <!-- Delete -->
+                    <form action="delete_order.php" method="POST" class="inline"
+                        onsubmit="return confirm('Order Completed?');">
 
-                            </button>
+                        <input type="hidden" name="product_id" value="<?= htmlspecialchars($order['product_id']) ?>">
 
-                        </td>
+                        <button type="submit"
+                            class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer">
 
-                    </tr>
+                            Delete
 
-                <?php endwhile; ?>
+                        </button>
+
+                    </form>
+
+
+                    <!-- Dispatch -->
+                    <button type="button" onclick="openDispatchModal(<?= (int)$order['product_id'] ?>)"
+                        class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer ml-4">
+
+                        Dispatch
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <?php endwhile; ?>
 
             <?php else: ?>
 
-                <tr>
+            <tr>
 
-                    <td colspan="9" class="text-center py-6 text-gray-500">
+                <td colspan="9" class="text-center py-6 text-gray-500">
 
-                        No orders found.
+                    No orders found.
 
-                    </td>
+                </td>
 
-                </tr>
+            </tr>
 
             <?php endif; ?>
 
@@ -423,9 +423,9 @@ $result = mysqli_stmt_get_result($stmt);
 
         <?php if ($search !== ''): ?>
 
-            <span>
-                for "<strong><?= htmlspecialchars($search) ?></strong>"
-            </span>
+        <span>
+            for "<strong><?= htmlspecialchars($search) ?></strong>"
+        </span>
 
         <?php endif; ?>
 
@@ -441,20 +441,20 @@ $result = mysqli_stmt_get_result($stmt);
         <!-- Previous -->
         <?php if ($page > 1): ?>
 
-            <a href="?page=<?= $page - 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
-                class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
+        <a href="?page=<?= $page - 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
+            class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
 
-                Previous
+            Previous
 
-            </a>
+        </a>
 
         <?php else: ?>
 
-            <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
+        <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
 
-                Previous
+            Previous
 
-            </span>
+        </span>
 
         <?php endif; ?>
 
@@ -470,24 +470,24 @@ $result = mysqli_stmt_get_result($stmt);
 
         <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
 
-            <?php if ($i == $page): ?>
+        <?php if ($i == $page): ?>
 
-                <span class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
+        <span class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm">
 
-                    <?= $i ?>
+            <?= $i ?>
 
-                </span>
+        </span>
 
-            <?php else: ?>
+        <?php else: ?>
 
-                <a href="?page=<?= $i ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
-                    class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
+        <a href="?page=<?= $i ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
+            class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
 
-                    <?= $i ?>
+            <?= $i ?>
 
-                </a>
+        </a>
 
-            <?php endif; ?>
+        <?php endif; ?>
 
         <?php endfor; ?>
 
@@ -495,20 +495,20 @@ $result = mysqli_stmt_get_result($stmt);
         <!-- Next -->
         <?php if ($page < $totalPages): ?>
 
-            <a href="?page=<?= $page + 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
-                class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
+        <a href="?page=<?= $page + 1 ?>&entries=<?= $entries ?>&search=<?= urlencode($search) ?>"
+            class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-600 hover:bg-gray-100">
 
-                Next
+            Next
 
-            </a>
+        </a>
 
         <?php else: ?>
 
-            <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
+        <span class="px-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-400 cursor-not-allowed">
 
-                Next
+            Next
 
-            </span>
+        </span>
 
         <?php endif; ?>
 
@@ -522,23 +522,23 @@ $result = mysqli_stmt_get_result($stmt);
 ========================= -->
 
 <script>
-    function changeEntries() {
+function changeEntries() {
 
-        const entries = document.getElementById('entries').value;
+    const entries = document.getElementById('entries').value;
 
-        const search = <?= json_encode($search) ?>;
+    const search = <?= json_encode($search) ?>;
 
-        const params = new URLSearchParams();
+    const params = new URLSearchParams();
 
-        params.set('entries', entries);
-        params.set('page', 1);
+    params.set('entries', entries);
+    params.set('page', 1);
 
-        if (search !== '') {
-            params.set('search', search);
-        }
-
-        window.location.href = '?' + params.toString();
+    if (search !== '') {
+        params.set('search', search);
     }
+
+    window.location.href = '?' + params.toString();
+}
 </script>
 
 
@@ -623,68 +623,199 @@ if (isset($_POST['submit'])) {
     exit;
 }
 
-// Display the selected product.
-if (isset($_POST['submit'])) {
 
-    $id = filter_input(INPUT_POST, 'product_id', FILTER_VALIDATE_INT);
-    $quantity = filter_input(INPUT_POST, 'quantity', FILTER_VALIDATE_INT);
+<?php
 
-    if (!$id || !$quantity || $quantity < 1) {
-        die("Invalid product or quantity.");
-    }
+require_once './db-con/db.php';
 
-    $stmt = mysqli_prepare(
-        $con,
-        "SELECT id FROM shop_items WHERE id = ?"
+$orderSuccess = false;
+$product_id = 0;
+$product_name = '';
+$price = 0.00;
+$quantity = 1;
+$subtotal = 0.00;
+
+// Determine whether this is a new form visit or a submission.
+$isSubmitting = $_SERVER['REQUEST_METHOD'] === 'POST';
+
+if ($isSubmitting) {
+    $product_id = filter_var(
+        $_POST['product_id'] ?? null,
+        FILTER_VALIDATE_INT
     );
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
 
-    if ($result && mysqli_num_rows($result) > 0) {
+    $quantity = filter_var(
+        $_POST['quantity'] ?? null,
+        FILTER_VALIDATE_INT
+    );
+} else {
+    $product_id = filter_var(
+        $_GET['id'] ?? null,
+        FILTER_VALIDATE_INT
+    );
 
-        header(
-            'Location: form.php?id=' . $id .
-                '&quantity=' . $quantity
-        );
-        exit;
-    } else {
-        die("Product not found.");
-    }
+    $quantity = filter_var(
+        $_GET['quantity'] ?? 1,
+        FILTER_VALIDATE_INT
+    );
 }
 
-if (isset($_GET['id'])) {
-
-    $id = (int) $_GET['id'];
-
-    $stmt = mysqli_prepare(
-        $con,
-        "SELECT product_name, price, description
-         FROM shop_items
-         WHERE id = ?"
-    );
-
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-
-        $product_name = $row['product_name'];
-        $price = $row['price'];
-        $description = $row['description'];
-    } else {
-        die("Product not found.");
-    }
-} else {
+// Validate the product ID and quantity.
+if (!$product_id || $product_id < 1) {
     die("No product selected.");
 }
 
+if (!$quantity || $quantity < 1) {
+    die("Invalid quantity.");
+}
+
+// Always retrieve the product and its price from MySQL.
+$stmt = mysqli_prepare(
+    $con,
+    "SELECT product_name, price
+     FROM shop_items
+     WHERE id = ?"
+);
+
+mysqli_stmt_bind_param($stmt, "i", $product_id);
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
+$product = mysqli_fetch_assoc($result);
+
+if (!$product) {
+    die("Product not found.");
+}
+
+$product_name = $product['product_name'];
+$price = (float) $product['price'];
+$subtotal = $price * $quantity;
 
 
+// Process the final form submission.
+if ($isSubmitting && isset($_POST['submit'])) {
 
+    $firstName = trim($_POST['first-name'] ?? '');
+    $lastName  = trim($_POST['last-name'] ?? '');
+    $name      = trim($firstName . ' ' . $lastName);
+    $email     = trim($_POST['email'] ?? '');
+    $phone     = trim($_POST['phone'] ?? '');
+    $address   = trim($_POST['address'] ?? '');
+    $comments  = trim($_POST['comments'] ?? '');
 
+    if ($firstName === '' || $lastName === '') {
+        die("Please enter your first and last name.");
+    }
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Please enter a valid email address.");
+    }
+
+    // Save the customer's information.
+    $stmt = mysqli_prepare(
+        $con,
+        "INSERT INTO cus_info
+            (name, email, phone, address)
+         VALUES (?, ?, ?, ?)"
+    );
+
+    if (!$stmt) {
+        die("Unable to prepare customer information.");
+    }
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "ssss",
+        $name,
+        $email,
+        $phone,
+        $address
+    );
+
+    if (!mysqli_stmt_execute($stmt)) {
+        die("Unable to save customer information.");
+    }
+
+    // Handle payment screenshot upload.
+    $qr_upload = null;
+
+    if (
+        isset($_FILES['qr_upload']) &&
+        $_FILES['qr_upload']['error'] === UPLOAD_ERR_OK
+    ) {
+        $uploadDir = __DIR__ . '/uploads/qr/';
+
+        if (
+            !is_dir($uploadDir) &&
+            !mkdir($uploadDir, 0755, true) &&
+            !is_dir($uploadDir)
+        ) {
+            die("Unable to create the upload directory.");
+        }
+
+        $tmpFile = $_FILES['qr_upload']['tmp_name'];
+        $imageInfo = getimagesize($tmpFile);
+
+        $allowedTypes = [
+            'image/jpeg' => 'jpg',
+            'image/png'  => 'png',
+            'image/gif'  => 'gif'
+        ];
+
+        $mime = $imageInfo['mime'] ?? '';
+
+        if ($imageInfo && isset($allowedTypes[$mime])) {
+
+            $newFileName = 'qr_' .
+                bin2hex(random_bytes(16)) .
+                '.' . $allowedTypes[$mime];
+
+            $targetPath = $uploadDir . $newFileName;
+
+            if (move_uploaded_file($tmpFile, $targetPath)) {
+                $qr_upload = 'uploads/qr/' . $newFileName;
+            }
+        }
+    }
+
+    if ($qr_upload === null) {
+        die("Please upload a valid payment screenshot.");
+    }
+
+    // Save the order using the database price and submitted quantity.
+    $stmt = mysqli_prepare(
+        $con,
+        "INSERT INTO cus_orders
+            (product_id, product_name, price, name, email,
+             phone, address, quantity, comments, qr_upload)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    );
+
+    if (!$stmt) {
+        die("Unable to prepare the order.");
+    }
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "isdssssiss",
+        $product_id,
+        $product_name,
+        $price,
+        $name,
+        $email,
+        $phone,
+        $address,
+        $quantity,
+        $comments,
+        $qr_upload
+    );
+
+    if (!mysqli_stmt_execute($stmt)) {
+        die("Unable to save the order.");
+    }
+
+    $orderSuccess = true;
+}
+?>
 
 ?>

@@ -2,100 +2,100 @@
 
 require_once './db-con/db.php';
 
-if (isset($_GET['id'])) {
+$orderSuccess = false;
+$product_id = 1;
+$product_name = '';
+$price = 0.00;
+$quantity = 1;
+$subtotal = 0.00;
 
-    $id = (int) $_GET['id'];
+// Determine whether this is a new form visit or a submission.
+$isSubmitting = $_SERVER['REQUEST_METHOD'] === 'POST';
 
-    // Get the selected quantity, defaulting to 1.
-    $quantity = isset($_GET['quantity'])
-        ? filter_var($_GET['quantity'], FILTER_VALIDATE_INT)
-        : 1;
-
-    if (!$quantity || $quantity < 1) {
-        die("Invalid quantity.");
-    }
-
-    $stmt = mysqli_prepare(
-        $con,
-        "SELECT product_name, price
-         FROM shop_items
-         WHERE id = ?"
+if ($isSubmitting) {
+    $product_id = filter_var(
+        $_POST['product_id'] ?? null,
+        FILTER_VALIDATE_INT
     );
 
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-
-        $row = mysqli_fetch_assoc($result);
-
-        $product_id = $id;
-        $product_name = $row['product_name'];
-        $price = (float) $row['price'];
-
-        // Calculate subtotal using the database price.
-        $subtotal = $price * $quantity;
-    } else {
-        die("Product not found.");
-    }
+    $quantity = filter_var(
+        $_POST['quantity'] ?? null,
+        FILTER_VALIDATE_INT
+    );
 } else {
+    $product_id = filter_var(
+        $_GET['id'] ?? null,
+        FILTER_VALIDATE_INT
+    );
+
+    $quantity = filter_var(
+        $_GET['quantity'] ?? 1,
+        FILTER_VALIDATE_INT
+    );
+}
+
+// Validate the product ID and quantity.
+if (!$product_id || $product_id < 1) {
     die("No product selected.");
 }
 
-if (isset($_POST['submit'])) {
+if (!$quantity || $quantity < 1) {
+    die("Invalid quantity.");
+}
 
-    $product_id = filter_input(
-        INPUT_POST,
-        'product_id',
-        FILTER_VALIDATE_INT
-    );
+// Always retrieve the product and its price from MySQL.
+$stmt = mysqli_prepare(
+    $con,
+    "SELECT product_name, price
+     FROM shop_items
+     WHERE id = ?"
+);
 
-    $quantity = filter_input(
-        INPUT_POST,
-        'quantity',
-        FILTER_VALIDATE_INT
-    );
+mysqli_stmt_bind_param($stmt, "i", $product_id);
+mysqli_stmt_execute($stmt);
 
-    if (!$product_id || !$quantity || $quantity < 1) {
-        die("Invalid product or quantity.");
-    }
+$result = mysqli_stmt_get_result($stmt);
+$product = mysqli_fetch_assoc($result);
 
-    // Always get the product's current price from the database.
-    $stmt = mysqli_prepare(
-        $con,
-        "SELECT product_name, price
-         FROM shop_items
-         WHERE id = ?"
-    );
+if (!$product) {
+    die("Product not found.");
+}
 
-    mysqli_stmt_bind_param($stmt, "i", $product_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $row = mysqli_fetch_assoc($result);
+$product_name = $product['product_name'];
+$price = (float) $product['price'];
+$subtotal = $price * $quantity;
 
-    if (!$row) {
-        die("Product not found.");
-    }
 
-    $product_name = $row['product_name'];
-    $price = (float) $row['price'];
-    $subtotal = $price * $quantity;
+// Process the final form submission.
+if ($isSubmitting && isset($_POST['submit'])) {
 
     $firstName = trim($_POST['first-name'] ?? '');
     $lastName  = trim($_POST['last-name'] ?? '');
-    $name      = $firstName . ' ' . $lastName;
+    $name      = trim($firstName . ' ' . $lastName);
     $email     = trim($_POST['email'] ?? '');
     $phone     = trim($_POST['phone'] ?? '');
     $address   = trim($_POST['address'] ?? '');
     $comments  = trim($_POST['comments'] ?? '');
 
-    // Save customer information.
+    if ($firstName === '' || $lastName === '') {
+        die("Please enter your first and last name.");
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Please enter a valid email address.");
+    }
+
+    // Save the customer's information.
     $stmt = mysqli_prepare(
         $con,
-        "INSERT INTO cus_info (name, email, phone, address)
+        "INSERT INTO cus_info
+            (name, email, phone, address)
          VALUES (?, ?, ?, ?)"
     );
+
+    if (!$stmt) {
+        die("Unable to prepare customer information.");
+    }
 
     mysqli_stmt_bind_param(
         $stmt,
@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
         die("Unable to save customer information.");
     }
 
-    // Handle QR upload.
+    // Handle payment screenshot upload.
     $qr_upload = null;
 
     if (
@@ -119,15 +119,16 @@ if (isset($_POST['submit'])) {
     ) {
         $uploadDir = __DIR__ . '/uploads/qr/';
 
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
+        if (
+            !is_dir($uploadDir) &&
+            !mkdir($uploadDir, 0755, true) &&
+            !is_dir($uploadDir)
+        ) {
+            die("Unable to create the upload directory.");
         }
 
         $tmpFile = $_FILES['qr_upload']['tmp_name'];
-
-        // Validate that the uploaded file is an actual image.
         $imageInfo = getimagesize($tmpFile);
-        $mime = $imageInfo['mime'] ?? '';
 
         $allowedTypes = [
             'image/jpeg' => 'jpg',
@@ -135,10 +136,13 @@ if (isset($_POST['submit'])) {
             'image/gif'  => 'gif'
         ];
 
+        $mime = $imageInfo['mime'] ?? '';
+
         if ($imageInfo && isset($allowedTypes[$mime])) {
 
-            $newFileName = 'qr_' . bin2hex(random_bytes(16))
-                . '.' . $allowedTypes[$mime];
+            $newFileName = 'qr_' .
+                bin2hex(random_bytes(16)) .
+                '.' . $allowedTypes[$mime];
 
             $targetPath = $uploadDir . $newFileName;
 
@@ -149,21 +153,25 @@ if (isset($_POST['submit'])) {
     }
 
     if ($qr_upload === null) {
-        die("Error uploading QR code. Please upload a valid image.");
+        die("Please upload a valid payment screenshot.");
     }
 
-    // Save order with product, quantity, and unit price.
+    // Save the order using the database price and submitted quantity.
     $stmt = mysqli_prepare(
         $con,
         "INSERT INTO cus_orders
-        (product_id, product_name, price, name, email,
-         phone, address, quantity, comments, qr_upload)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            (product_id, product_name, price, name, email,
+             phone, address, quantity, subtotal, comments, qr_upload)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
+
+    if (!$stmt) {
+        die("Unable to prepare the order.");
+    }
 
     mysqli_stmt_bind_param(
         $stmt,
-        "isdssssiss",
+        "isdssssisss",
         $product_id,
         $product_name,
         $price,
@@ -172,18 +180,17 @@ if (isset($_POST['submit'])) {
         $phone,
         $address,
         $quantity,
+        $subtotal,
         $comments,
         $qr_upload
     );
 
     if (!mysqli_stmt_execute($stmt)) {
-        die("Unable to save order.");
+        die("Unable to save the order.");
     }
 
     $orderSuccess = true;
 }
-
-
 ?>
 
 
@@ -301,9 +308,11 @@ if (isset($_POST['submit'])) {
 
 
 
-            <form method="POST" action="form.php" enctype="multipart/form-data">
+            <form method="POST" action="form.php?id=<?= (int)$product_id ?>&quantity=<?= (int)$quantity ?>"
+                enctype="multipart/form-data">
 
                 <input type="hidden" name="product_id" value="<?= (int) $product_id ?>">
+                <input type="hidden" name="quantity" value="<?= (int) $quantity ?>">
                 <div class="mt-4 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="sm:col-span-3">
 
@@ -351,10 +360,15 @@ if (isset($_POST['submit'])) {
                         </div>
 
                     </div>
-
-
-                    <input type="hidden" name="quantity" value="<?= (int) $quantity ?>">
-
+                    <!-- <div class="sm:col-span-3">
+                        <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Set
+                            Quantity</label>
+                        <div class="mt-2">
+                            <input id="quantity" name="quantity" type="quantity" autocomplete="quantity"
+                                placeholder="Quantity"
+                                class="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-[#515151] sm:text-sm sm:leading-6">
+                        </div>
+                    </div> -->
 
                     <!-- leave a comments -->
                     <div class="col-span-full">
