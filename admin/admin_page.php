@@ -146,16 +146,13 @@ $result = mysqli_stmt_get_result($stmt);
     <link rel="stylesheet" href="./../src/output.css">
 </head>
 
-<body class="">
+<body class="bg-gray-50">
 
     <?php include('sidebar.php'); ?>
 
     <!-- Dynamic Content Body -->
-    <main class=" overflow-x-hidden overflow-y-auto bg-gray-50 p-6">
+    <main class=" overflow-x-hidden overflow-y-auto p-6 w-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-
-
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                 <h3 class="text-gray-500 text-sm font-medium">Total Sales</h3>
                 <p class="text-3xl font-bold text-gray-900 mt-2">
@@ -199,10 +196,10 @@ $result = mysqli_stmt_get_result($stmt);
             </div>
         </div>
 
-        <h1 class=" text-xl font-semibold text-gray-800 mt-5">Customer Orders</h1>
+        <h1 class="text-xl font-semibold text-gray-800 mt-5">Customer Orders</h1>
         <p class="text-gray-600 text-sm">This page displays all the customer orders and their details.</p>
 
-        <div class="w-full overflow-y-auto py-2">
+        <div class="w-auto overflow-y-auto py-2">
 
             <!-- search & entries control -->
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mt-4 mb-4">
@@ -410,9 +407,7 @@ $result = mysqli_stmt_get_result($stmt);
                                     <!-- Dispatch -->
                                     <button type="button" onclick="openDispatchModal(<?= (int)$order['order_id'] ?>)"
                                         class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer ml-4">
-
                                         Dispatch
-
                                     </button>
 
                                 </td>
@@ -453,7 +448,7 @@ $result = mysqli_stmt_get_result($stmt);
                         </button>
 
                         <form method="POST" action="dispatch.php">
-                            <input type="hidden" name="product_id" id="dispatchProductId">
+                            <input type="hidden" name="order_id" id="dispatchOrderId">
                             <button type="submit"
                                 class="px-4 py-2 rounded-lg bg-[#025479] text-white hover:bg-[#013f5c]">
                                 Dispatch
@@ -622,10 +617,10 @@ $result = mysqli_stmt_get_result($stmt);
     <!-- dispatch -->
     <script>
         const dispatchModal = document.getElementById('DispatchModal');
-        const dispatchInput = document.getElementById('dispatchProductId');
+        const dispatchInput = document.getElementById('dispatchOrderId');
 
-        function openDispatchModal(productId) {
-            dispatchInput.value = productId;
+        function openDispatchModal(orderId) {
+            dispatchInput.value = orderId;
             dispatchModal.classList.remove('hidden');
             0
             dispatchModal.classList.add('flex');

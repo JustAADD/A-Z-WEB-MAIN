@@ -12,12 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 
         // 1. Copy the row(s) to the dispatched table
         $insert = $con->prepare("
-            INSERT INTO complete_orders (order_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload)
-            SELECT product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload
+            INSERT INTO complete_orders (order_id, product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload)
+            SELECT order_id, product_id, product_name, price, name, email, phone, address, quantity, comments, qr_upload
             FROM cus_orders
-            WHERE product_id = ?
+            WHERE order_id = ?
         ");
-        $insert->bind_param("i", $product_id);
+        $insert->bind_param("i", $order_id);
         $insert->execute();
         $copied = $insert->affected_rows;
         $insert->close();
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'])) {
 
         // 2. Delete from the original table
         $delete = $con->prepare("DELETE FROM cus_orders WHERE order_id = ?");
-        $delete->bind_param("i", $product_id);
+        $delete->bind_param("i", $order_id);
         $delete->execute();
         $delete->close();
 
