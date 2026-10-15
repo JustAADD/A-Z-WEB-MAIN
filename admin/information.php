@@ -197,12 +197,12 @@ $result = mysqli_stmt_get_result($stmt);
 
                     <?php if ($search !== ''): ?>
 
-                        <a href="?entries=<?= $entries ?>"
-                            class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
+                    <a href="?entries=<?= $entries ?>"
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm">
 
-                            Clear
+                        Clear
 
-                        </a>
+                    </a>
 
                     <?php endif; ?>
 
@@ -234,70 +234,70 @@ $result = mysqli_stmt_get_result($stmt);
                 <tbody class="">
                     <?php if (mysqli_num_rows($result) > 0): ?>
 
-                        <?php while ($order = mysqli_fetch_assoc($result)): ?>
+                    <?php while ($order = mysqli_fetch_assoc($result)): ?>
 
-                            <tr>
+                    <tr>
 
-                                <!-- Customer -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['name']) ?>
-                                </td>
-
-
-                                <!-- Email -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['email']) ?>
-                                </td>
+                        <!-- Customer -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['name']) ?>
+                        </td>
 
 
-                                <!-- Phone -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['phone']) ?>
-                                </td>
+                        <!-- Email -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['email']) ?>
+                        </td>
 
 
-                                <!-- Address -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-                                    <?= htmlspecialchars($order['address']) ?>
-                                </td>
-
-                                <!-- Action -->
-                                <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
-
-                                    <!-- Delete -->
-                                    <form action="info_delete" method="POST" class="inline"
-                                        onsubmit="return confirm('Are you sure you want to delete this customer?');">
-
-                                        <!-- Customer ID -->
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars($order['id']) ?>">
+                        <!-- Phone -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['phone']) ?>
+                        </td>
 
 
-                                        <!-- Delete Button -->
-                                        <button type="submit" title="Delete customer" aria-label="Delete customer"
-                                            class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer">
+                        <!-- Address -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
+                            <?= htmlspecialchars($order['address']) ?>
+                        </td>
 
-                                            Delete
+                        <!-- Action -->
+                        <td class="border px-4 py-3 border-gray-300 text-gray-600 text-sm whitespace-nowrap">
 
-                                        </button>
+                            <!-- Delete -->
+                            <form action="info_delete" method="POST" class="inline"
+                                onsubmit="return confirm('Are you sure you want to delete this customer?');">
 
-                                    </form>
-                                </td>
+                                <!-- Customer ID -->
+                                <input type="hidden" name="id" value="<?= htmlspecialchars($order['id']) ?>">
 
-                            </tr>
 
-                        <?php endwhile; ?>
+                                <!-- Delete Button -->
+                                <button type="submit" title="Delete customer" aria-label="Delete customer"
+                                    class="text-red-600 hover:text-red-900 bg-transparent border-0 p-0 cursor-pointer">
+
+                                    Delete
+
+                                </button>
+
+                            </form>
+                        </td>
+
+                    </tr>
+
+                    <?php endwhile; ?>
 
                     <?php else: ?>
 
-                        <tr>
+                    <tr>
 
-                            <td colspan="9" class="text-center py-6 text-gray-500">
+                        <td colspan="9" class="text-center py-6 text-gray-500">
 
-                                No orders found.
+                            No orders found.
 
-                            </td>
+                        </td>
 
-                        </tr>
+                    </tr>
 
                     <?php endif; ?>
                 </tbody>
